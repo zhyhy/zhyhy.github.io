@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Callbacks函数之前在MATLAB中的一个神经网络工具包MatConvNet上跑CNN模型，当时一旦程序运行起来，除了观察acc和loss曲线，我能做的只有等着程序结束，当时就想能有一个在程序运行过程中的，能进行动态调试的途径，今天看了看Keras中的回调函数，就刚好满足了我这个需求，talk is cheap, show me the code.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解keras中的回调函数Callbacks">
+<meta property="og:url" content="http://yoursite.com/2019/09/03/理解keras中的回调函数Callbacks/index.html">
+<meta property="og:site_name" content="zhyhy">
+<meta property="og:description" content="Callbacks函数之前在MATLAB中的一个神经网络工具包MatConvNet上跑CNN模型，当时一旦程序运行起来，除了观察acc和loss曲线，我能做的只有等着程序结束，当时就想能有一个在程序运行过程中的，能进行动态调试的途径，今天看了看Keras中的回调函数，就刚好满足了我这个需求，talk is cheap, show me the code.">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-09-03T14:08:32.531Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解keras中的回调函数Callbacks">
+<meta name="twitter:description" content="Callbacks函数之前在MATLAB中的一个神经网络工具包MatConvNet上跑CNN模型，当时一旦程序运行起来，除了观察acc和loss曲线，我能做的只有等着程序结束，当时就想能有一个在程序运行过程中的，能进行动态调试的途径，今天看了看Keras中的回调函数，就刚好满足了我这个需求，talk is cheap, show me the code.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/03/理解keras中的回调函数Callbacks/">
+
+
+
+
+
+  <title>理解keras中的回调函数Callbacks | zhyhy</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhyhy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/03/理解keras中的回调函数Callbacks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhyhy">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/hexo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhyhy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">理解keras中的回调函数Callbacks</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-03T19:51:48+08:00">
+                2019-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/03/理解keras中的回调函数Callbacks/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/03/理解keras中的回调函数Callbacks/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/09/03/理解keras中的回调函数Callbacks/" class="leancloud_visitors" data-flag-title="理解keras中的回调函数Callbacks">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Callbacks函数"><a href="#Callbacks函数" class="headerlink" title="Callbacks函数"></a>Callbacks函数</h2><p>之前在MATLAB中的一个神经网络工具包MatConvNet上跑CNN模型，当时一旦程序运行起来，除了观察acc和loss曲线，我能做的只有等着程序结束，当时就想能有一个在程序运行过程中的，能进行动态调试的途径，今天看了看Keras中的回调函数，就刚好满足了我这个需求，talk is cheap, show me the code.</p>
+<a id="more"></a>
+<h3 id="fit"><a href="#fit" class="headerlink" title="fit"></a>fit</h3><p>在说回调函数之前，先看一下fit()函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">model.fit(</span><br><span class="line">	self,x,y,</span><br><span class="line">	batch_size = <span class="number">64</span>,</span><br><span class="line">	epochs= <span class="number">10</span>,</span><br><span class="line">	verbose = <span class="number">1</span>,</span><br><span class="line">	callbacks = [],</span><br><span class="line">	validation_data = <span class="literal">None</span>,</span><br><span class="line">	shuffle = <span class="literal">True</span>,</span><br><span class="line">	class_weight = <span class="literal">None</span>,</span><br><span class="line">	sample_weight = <span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>-&gt;verbose：日志显示，0为不在标准输出流输出日志信息，1为输出进度条记录，2为每个epoch输出一行记录<br>-&gt;callbacks：list，其中的元素是keras.callbacks.Callback的对象。这个list中的回调函数将会在训练过程中的适当时机被调用，参考回调函数。<br>keras的model.fit()函数接受一个callback列表，在训练的不同阶段会触发callback的不同操作。其中这些阶段包括：<br>① 训练开始和结束<br>② 批次开始和结束<br>③ 轮次开始和结束</p>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>-&gt; 模型检查点（model checkpointing）：在训练过程中的不同时间点保存模型的当前权重。</p>
+<p>-&gt;提前终止（early stopping）：如果验证损失不再改善，则中断训练（当然，同时保存在训练过程中得到的最佳模型）</p>
+<p>-&gt;在训练过程中动态调节某些参数值：比如优化器的学习率。</p>
+<p>-&gt;在训练过程中记录训练指标和验证指标，或将模型学到的表示可视化（这些表示也在不断更新）：如Keras 进度条就是一个回调函数</p>
+<p>keras.callbacks模块就包含了许多内置的回调函数，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">kears.callbacks.ModelCheckpoint</span><br><span class="line">keras.callbacks.EarlyStopping</span><br><span class="line">keras.callbacks.LearningRateScheduler</span><br><span class="line">keras.callbacks.ReduceLROnPlateau</span><br><span class="line">keras.callbacks.CSVLogger</span><br></pre></td></tr></table></figure>
+
+<h3 id="ModelCheckpoint"><a href="#ModelCheckpoint" class="headerlink" title="ModelCheckpoint"></a>ModelCheckpoint</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">keras.callbacks.ModelCheckpoint（</span><br><span class="line">	filepath,</span><br><span class="line">	monitor = <span class="string">'val_loss'</span>,</span><br><span class="line">	verbose = <span class="number">0</span>,</span><br><span class="line">	save_best_only = <span class="literal">False</span>,</span><br><span class="line">	save_weights_only = <span class="literal">False</span>,</span><br><span class="line">        mode=<span class="string">'auto'</span>, </span><br><span class="line">        period=<span class="number">1</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li><blockquote>
+<p>filename:字符串，保存模型的路径 </p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>monitor:需要监视的值</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>verbose:信息展示模式，0或1 </p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>save_best_only：当设置为True时，将只保存在验证集上性能最好的模型，通常为True</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>mode：‘auto’，‘min’，‘max’之一，在save_best_only=True时决定性能最佳模型的评判准则，例如，当监测值为val_acc时，模式应为max，当检测值为val_loss时，模式应为min。在auto模式下，评价准则由被监测值的名字自动推断,通常为auto</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>save_weights_only：若设置为True，则只保存模型权重，否则将保存整个模型（包括模型结构，配置信息等）</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>period：CheckPoint之间的间隔的epoch数</p>
+</blockquote>
+<h3 id="EarlyStop"><a href="#EarlyStop" class="headerlink" title="EarlyStop"></a>EarlyStop</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">keras.callbacks.EarlyStopping(</span><br><span class="line">    monitor=<span class="string">'val_loss'</span>, </span><br><span class="line">    patience=<span class="number">0</span>, </span><br><span class="line">    verbose=<span class="number">0</span>, </span><br><span class="line">    mode=<span class="string">'auto'</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>参数说明：</p>
+<ul>
+<li><blockquote>
+<p>monitor：需要监视的量 </p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>patience：当early stop被激活（如发现loss相比上一个epoch训练没有下降），则经过patience个epoch后停止训练。</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>verbose：信息展示模式 </p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>mode：‘auto’，‘min’，‘max’之一，在min模式下，如果检测值停止下降则中止训练。在max模式下，当检测值不再上升则停止训练。</p>
+</blockquote>
+<h3 id="LearingRateSchedule（ReduceLROnPlateau）"><a href="#LearingRateSchedule（ReduceLROnPlateau）" class="headerlink" title="LearingRateSchedule（ReduceLROnPlateau）"></a>LearingRateSchedule（ReduceLROnPlateau）</h3>如果验证损失不再改善，你可以使用这个回调函数来降低学习率。在训练过程中如果出现了损失平台（loss plateau），那么增大或减小学习率都是跳出局部最小值的有效策略。这里可以用到ReduceLROnPlateau回调函数。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">keras.callbacks.ReduceLROnPlateau(</span><br><span class="line">    monitor=<span class="string">'val_loss'</span>, </span><br><span class="line">    factor=<span class="number">0.1</span>, </span><br><span class="line">    patience=<span class="number">10</span>, </span><br><span class="line">    verbose=<span class="number">0</span>, </span><br><span class="line">    mode=<span class="string">'auto'</span>, </span><br><span class="line">    epsilon=<span class="number">0.0001</span>, </span><br><span class="line">    cooldown=<span class="number">0</span>, </span><br><span class="line">    min_lr=<span class="number">0</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>参数说明：</p>
+<ul>
+<li><blockquote>
+<p>monitor：被监测的量 </p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>factor：每次减少学习率的因子，学习率将以lr = lr*factor的形式被减少 </p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>patience：当patience个epoch过去而模型性能不提升时，这个回调函数就会被触发</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>mode：‘auto’，‘min’，‘max’之一，在min模式下，如果检测值触发学习率减少。在max模式下，当检测值不再上升则触发学习率减少。</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>epsilon：阈值，用来确定是否进入检测值的“平原区” </p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>cooldown：学习率减少后，会经过cooldown个epoch才重新进行正常操作 </p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>min_lr：学习率的下限</p>
+</blockquote>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3>当监控的目标（monitor）不在改善时，可以使用EarlyStopping回调函数来中断训练，并且EarlyStopping经常和ModelCheakpoint结合使用<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> keras </span><br><span class="line"><span class="comment">#通过fit的callbacks参数将回调函数传入模型中，这个参数接收一个回调函数列表，你可以传入任意个回调函数</span></span><br><span class="line">callback_lists = [</span><br><span class="line">keras.callbacks.EarlyStopping(monitor = <span class="string">'acc'</span>,  <span class="comment"># 监控模型的验证精度</span></span><br><span class="line">                              patience = <span class="number">1</span>,),   <span class="comment"># 如果精度在多于一轮的时间（即两轮）内不再改善，就中断训练</span></span><br><span class="line"><span class="comment"># ModelCheckpoint用于在每轮过后保存当前权重</span></span><br><span class="line">keras.callbacks.ModelCheckpoint(filepath = <span class="string">'my_model.h5'</span>, <span class="comment"># 目标文件的保存路径</span></span><br><span class="line">                                monitor = <span class="string">'val_loss'</span>, save_best_only = <span class="literal">True</span>,)</span><br><span class="line"> <span class="comment"># 这两个参数的意思是，如果val_loss没有改善，那么不需要覆盖模型文件，</span></span><br><span class="line"> <span class="comment"># 这就可以始终保存在训练过程中见到的最佳模型    </span></span><br><span class="line">		]</span><br><span class="line">model.compile(optimizer = <span class="string">'rmsprop'</span>, loss = <span class="string">'binary_crossentropy'</span>, metrics = [<span class="string">'acc'</span>])</span><br><span class="line"><span class="comment"># 由于回调函数要监控验证损失和验证精度，所以在调用fit时需要传入validation_data（验证数据）</span></span><br><span class="line">model.fit(x, y, epochs = <span class="number">10</span>,</span><br><span class="line">          batch_size = <span class="number">32</span>,</span><br><span class="line">          callbacks = callbacks_list,</span><br><span class="line">          validation_data = (x_val, y_val))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="四种Checkpoint例子"><a href="#四种Checkpoint例子" class="headerlink" title="四种Checkpoint例子"></a>四种Checkpoint例子</h2><h3 id="1-官网"><a href="#1-官网" class="headerlink" title="1.官网"></a>1.官网</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.callbacks <span class="keyword">import</span> ModelCheckpoint</span><br><span class="line">model = Sequential()</span><br><span class="line">model.add(Dense(<span class="number">10</span>, input_dim=<span class="number">784</span>, kernel_initializer=<span class="string">'uniform'</span>))</span><br><span class="line">model.add(Activation(<span class="string">'softmax'</span>))</span><br><span class="line">model.compile(loss=<span class="string">'categorical_crossentropy'</span>, optimizer=<span class="string">'rmsprop'</span>)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">saves the model weights after each epoch if the validation loss decreased</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">checkpointer = ModelCheckpoint(</span><br><span class="line">	filepath=<span class="string">"/tmp/weights.hdf5"</span>, </span><br><span class="line">	verbose=<span class="number">1</span>, </span><br><span class="line">	save_best_only=<span class="literal">True</span>)</span><br><span class="line">model.fit(X_train, Y_train, batch_size=<span class="number">128</span>, epochs=<span class="number">20</span>, verbose=<span class="number">0</span>, </span><br><span class="line">	validation_data=(X_test, Y_test), </span><br><span class="line">	callbacks=[checkpointer])</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-当模型有提升时，保存模型"><a href="#2-当模型有提升时，保存模型" class="headerlink" title="2.当模型有提升时，保存模型"></a>2.当模型有提升时，保存模型</h3><p>正常思维是，在训练过程中，如果模型有提升，则保存输出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Checkpoint the weights when validation accuracy improves</span></span><br><span class="line"><span class="comment"># Compile model</span></span><br><span class="line">model.compile(loss=<span class="string">'binary_crossentropy'</span>, optimizer=<span class="string">'adam'</span>, metrics=[<span class="string">'accuracy'</span>])</span><br><span class="line"><span class="comment"># checkpoint</span></span><br><span class="line">filepath=<span class="string">"weights-improvement-&#123;epoch:02d&#125;-&#123;val_acc:.2f&#125;.hdf5"</span></span><br><span class="line">checkpoint= ModelCheckpoint(</span><br><span class="line">	filepath, </span><br><span class="line">	monitor=<span class="string">'val_acc'</span>, </span><br><span class="line">	verbose=<span class="number">1</span>, </span><br><span class="line">	save_best_only=<span class="literal">True</span>, </span><br><span class="line">	mode=<span class="string">'max'</span>)</span><br><span class="line">callbacks_list= [checkpoint]</span><br><span class="line"><span class="comment"># Fit the model</span></span><br><span class="line">model.fit(X, Y, validation_split=<span class="number">0.33</span>, epochs=<span class="number">150</span>, batch_size=<span class="number">10</span>, </span><br><span class="line">	callbacks=callbacks_list, verbose=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Checkpoint设置成当<strong>验证数据集的分类精度</strong>提高时保存网络权重(monitor=’val_acc’ and mode=’max’)。权重存储在一个包含评价的文件中(weights-improvement – { val_acc = .2f } .hdf5)。<strong>这种情况，是包含多个.hdf5文件。</strong></p>
+<h3 id="3-保存最佳的Checkpoint模型"><a href="#3-保存最佳的Checkpoint模型" class="headerlink" title="3.保存最佳的Checkpoint模型"></a>3.保存最佳的Checkpoint模型</h3><p>如果验证精度提高的话，一个更简单的Checkpoint策略是将模型权重保存到相同的文件中。<br>在这种情况下，<strong>只有当验证数据集上的模型的分类精度提高到到目前为止最好的时候，才会将模型权重写入文件”weights.best.hdf5”</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Compile model</span></span><br><span class="line">model.compile(loss=<span class="string">'binary_crossentropy'</span>, optimizer=<span class="string">'adam'</span>, metrics=[<span class="string">'accuracy'</span>])</span><br><span class="line"><span class="comment"># checkpoint</span></span><br><span class="line">filepath=<span class="string">"weights.best.hdf5"</span></span><br><span class="line">	checkpoint= ModelCheckpoint(</span><br><span class="line">	filepath,</span><br><span class="line">	monitor=<span class="string">'val_acc'</span>, </span><br><span class="line">	verbose=<span class="number">1</span>, </span><br><span class="line">	save_best_only=<span class="literal">True</span>, </span><br><span class="line">	mode=<span class="string">'max'</span>)</span><br><span class="line">callbacks_list= [checkpoint]</span><br><span class="line"><span class="comment"># Fit the model</span></span><br><span class="line">model.fit(X, Y, validation_split=<span class="number">0.33</span>, epochs=<span class="number">150</span>, batch_size=<span class="number">10</span>, </span><br><span class="line">	callbacks=callbacks_list, verbose=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-加载之前保存过的Checkpoint模型"><a href="#4-加载之前保存过的Checkpoint模型" class="headerlink" title="4.加载之前保存过的Checkpoint模型"></a>4.加载之前保存过的Checkpoint模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">model.load_weights(<span class="string">"weights.best.hdf5"</span>)</span><br><span class="line"><span class="comment"># Compile model (required to make predictions)</span></span><br><span class="line">model.compile(loss=<span class="string">'binary_crossentropy'</span>, optimizer=<span class="string">'adam'</span>, metrics=[<span class="string">'accuracy'</span>])</span><br><span class="line">print(<span class="string">"Created model and loaded weights from file"</span>)</span><br><span class="line"><span class="comment"># load data</span></span><br><span class="line">X = dataset.X</span><br><span class="line">Y = dataset.Y</span><br><span class="line"><span class="comment"># estimate accuracy on whole dataset using loaded weights</span></span><br><span class="line">scores= model.evaluate(X, Y, verbose=<span class="number">0</span>)</span><br><span class="line">print(<span class="string">"%s: %.2f%%"</span> % (model.metrics_names[<span class="number">1</span>], scores[<span class="number">1</span>]*<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+
+<p>运行示例生成以下输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Created modeland loaded weightsfrom file</span><br><span class="line">acc:77.73%</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Save the weights<br>model.save_weights(‘./checkpoints/my_checkpoint’)</li>
+<li>load the weights<br>model.load _weights(‘./checkpoints/my_checkpoint’)</li>
+</ul>
+<h2 id="使用自己的回调函数"><a href="#使用自己的回调函数" class="headerlink" title="使用自己的回调函数"></a>使用自己的回调函数</h2><p>在编写自定义的回调函数时，需继承keras.callbacks.Callback类。</p>
+<h3 id="记录损失函数的历史数据LossHistory"><a href="#记录损失函数的历史数据LossHistory" class="headerlink" title="记录损失函数的历史数据LossHistory"></a>记录损失函数的历史数据LossHistory</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LossHistory</span><span class="params">(keras.callbacks.Callback)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_train_begin</span><span class="params">(self, logs=&#123;&#125;)</span>:</span></span><br><span class="line">        self.losses = []</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_batch_end</span><span class="params">(self, batch, logs=&#123;&#125;)</span>:</span></span><br><span class="line">        self.losses.append(logs.get(<span class="string">'loss'</span>))</span><br><span class="line">model = Sequential()</span><br><span class="line">model.add(Dense(<span class="number">10</span>, input_dim=<span class="number">784</span>, kernel_initializer=<span class="string">'uniform'</span>))</span><br><span class="line">model.add(Activation(<span class="string">'softmax'</span>))</span><br><span class="line">model.compile(loss=<span class="string">'categorical_crossentropy'</span>, optimizer=<span class="string">'rmsprop'</span>)</span><br><span class="line">history = LossHistory()</span><br><span class="line">model.fit(X_train, Y_train, batch_size=<span class="number">128</span>, epochs=<span class="number">20</span>, verbose=<span class="number">0</span>, callbacks=[history])</span><br><span class="line"></span><br><span class="line">print(history.losses)</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[0.66047596406559383, 0.3547245744908703, ..., 0.25953155204159617, 0.25901699725311789]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://keras-cn.readthedocs.io/en/latest/other/callbacks/#csvlogger" target="_blank" rel="noopener">https://keras-cn.readthedocs.io/en/latest/other/callbacks/#csvlogger</a><br><a href="http://www.ishenping.com/ArtInfo/938616.html" target="_blank" rel="noopener">http://www.ishenping.com/ArtInfo/938616.html</a><br><a href="https://www.icode9.com/content-4-47520.html" target="_blank" rel="noopener">https://www.icode9.com/content-4-47520.html</a><br><a href="https://blog.csdn.net/github_36326955/article/details/79794288" target="_blank" rel="noopener">https://blog.csdn.net/github_36326955/article/details/79794288</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/02/Leetcode-112-路径总和/" rel="next" title="Leetcode -112 路径总和">
+                <i class="fa fa-chevron-left"></i> Leetcode -112 路径总和
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/04/理解Keras中的History对象/" rel="prev" title="理解Keras中的History对象">
+                理解Keras中的History对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/hexo.png" alt="zhyhy">
+            
+              <p class="site-author-name" itemprop="name">zhyhy</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Callbacks函数"><span class="nav-number">1.</span> <span class="nav-text">Callbacks函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fit"><span class="nav-number">1.1.</span> <span class="nav-text">fit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">1.2.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ModelCheckpoint"><span class="nav-number">1.3.</span> <span class="nav-text">ModelCheckpoint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EarlyStop"><span class="nav-number">1.4.</span> <span class="nav-text">EarlyStop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LearingRateSchedule（ReduceLROnPlateau）"><span class="nav-number">1.5.</span> <span class="nav-text">LearingRateSchedule（ReduceLROnPlateau）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">1.6.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四种Checkpoint例子"><span class="nav-number">2.</span> <span class="nav-text">四种Checkpoint例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-官网"><span class="nav-number">2.1.</span> <span class="nav-text">1.官网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-当模型有提升时，保存模型"><span class="nav-number">2.2.</span> <span class="nav-text">2.当模型有提升时，保存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-保存最佳的Checkpoint模型"><span class="nav-number">2.3.</span> <span class="nav-text">3.保存最佳的Checkpoint模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-加载之前保存过的Checkpoint模型"><span class="nav-number">2.4.</span> <span class="nav-text">4.加载之前保存过的Checkpoint模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用自己的回调函数"><span class="nav-number">3.</span> <span class="nav-text">使用自己的回调函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#记录损失函数的历史数据LossHistory"><span class="nav-number">3.1.</span> <span class="nav-text">记录损失函数的历史数据LossHistory</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhyhy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'vgq5f1g8nNN2CHdKFdIg0rMu-gzGzoHsz',
+        appKey: 'UHVY1g4LmX48rlBVikCOnsPY',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("vgq5f1g8nNN2CHdKFdIg0rMu-gzGzoHsz", "UHVY1g4LmX48rlBVikCOnsPY");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
