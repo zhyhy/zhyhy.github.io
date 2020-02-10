@@ -79,20 +79,19 @@
 
 
 
-<meta name="description" content="最近需要做一个数据增强的DL实验，需要在每个batch时候对训练数据进行数据增强（添加一些虚假点），以此学习了kears中model.fit_generator()函数，在模型训练的时候，记录一下学习过程以及调试的过程。 函数参数说明1fit_generator(generator, steps_per_epoch=None, epochs=1, verbose=1, callbacks=None">
+<meta name="description" content="第20题：有效的括号给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。有效字符串需满足：  左括号必须用相同类型的右括号闭合。 左括号必须以正确的顺序闭合。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Keras中fit_generator()函数，以及梯度为nan的解决方法">
-<meta property="og:url" content="http://yoursite.com/2019/08/16/Keras中fit-generator-函数，以及梯度为nan的解决方法/index.html">
+<meta property="og:title" content="LeetCode刷题">
+<meta property="og:url" content="http://yoursite.com/2020/02/10/LeetCode刷题/index.html">
 <meta property="og:site_name" content="zhyhy">
-<meta property="og:description" content="最近需要做一个数据增强的DL实验，需要在每个batch时候对训练数据进行数据增强（添加一些虚假点），以此学习了kears中model.fit_generator()函数，在模型训练的时候，记录一下学习过程以及调试的过程。 函数参数说明1fit_generator(generator, steps_per_epoch=None, epochs=1, verbose=1, callbacks=None">
+<meta property="og:description" content="第20题：有效的括号给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。有效字符串需满足：  左括号必须用相同类型的右括号闭合。 左括号必须以正确的顺序闭合。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/16/467e8ab0-c022-11e9-bdb5-0b0b07a3432e.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/16/96754680-c022-11e9-bdb5-0b0b07a3432e.png">
-<meta property="og:updated_time" content="2019-09-03T14:12:01.286Z">
+<meta property="og:image" content="http://yoursite.com/images/2019/08/07/514a4900-b917-11e9-80cd-11b46d1aba4d.png">
+<meta property="og:updated_time" content="2020-02-10T01:53:06.900Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Keras中fit_generator()函数，以及梯度为nan的解决方法">
-<meta name="twitter:description" content="最近需要做一个数据增强的DL实验，需要在每个batch时候对训练数据进行数据增强（添加一些虚假点），以此学习了kears中model.fit_generator()函数，在模型训练的时候，记录一下学习过程以及调试的过程。 函数参数说明1fit_generator(generator, steps_per_epoch=None, epochs=1, verbose=1, callbacks=None">
-<meta name="twitter:image" content="http://yoursite.com/images/2019/08/16/467e8ab0-c022-11e9-bdb5-0b0b07a3432e.png">
+<meta name="twitter:title" content="LeetCode刷题">
+<meta name="twitter:description" content="第20题：有效的括号给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。有效字符串需满足：  左括号必须用相同类型的右括号闭合。 左括号必须以正确的顺序闭合。">
+<meta name="twitter:image" content="http://yoursite.com/images/2019/08/07/514a4900-b917-11e9-80cd-11b46d1aba4d.png">
 
 
 
@@ -122,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/16/Keras中fit-generator-函数，以及梯度为nan的解决方法/">
+  <link rel="canonical" href="http://yoursite.com/2020/02/10/LeetCode刷题/">
 
 
 
 
 
-  <title>Keras中fit_generator()函数，以及梯度为nan的解决方法 | zhyhy</title>
+  <title>LeetCode刷题 | zhyhy</title>
   
 
 
@@ -287,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/16/Keras中fit-generator-函数，以及梯度为nan的解决方法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/LeetCode刷题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhyhy">
@@ -304,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Keras中fit_generator()函数，以及梯度为nan的解决方法</h1>
+          <h1 class="post-title" itemprop="name headline">LeetCode刷题</h1>
         
 
         <div class="post-meta">
@@ -316,8 +315,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-16T20:24:41+08:00">
-                2019-08-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-10T09:44:09+08:00">
+                2020-02-10
               </time>
             
 
@@ -327,28 +326,6 @@
           </span>
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/消除BUG/" itemprop="url" rel="index">
-                    <span itemprop="name">消除BUG</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -357,8 +334,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/08/16/Keras中fit-generator-函数，以及梯度为nan的解决方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/16/Keras中fit-generator-函数，以及梯度为nan的解决方法/" itemprop="commentCount"></span>
+                <a href="/2020/02/10/LeetCode刷题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/10/LeetCode刷题/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -366,7 +343,7 @@
 
           
           
-             <span id="/2019/08/16/Keras中fit-generator-函数，以及梯度为nan的解决方法/" class="leancloud_visitors" data-flag-title="Keras中fit_generator()函数，以及梯度为nan的解决方法">
+             <span id="/2020/02/10/LeetCode刷题/" class="leancloud_visitors" data-flag-title="LeetCode刷题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -402,17 +379,19 @@
       
 
       
-        <p>最近需要做一个数据增强的DL实验，需要在每个batch时候对训练数据进行数据增强（添加一些虚假点），以此学习了kears中model.fit_generator()函数，在模型训练的时候，记录一下学习过程以及调试的过程。</p>
-<h2 id="函数参数说明"><a href="#函数参数说明" class="headerlink" title="函数参数说明"></a>函数参数说明</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fit_generator(generator, steps_per_epoch=<span class="literal">None</span>, epochs=<span class="number">1</span>, verbose=<span class="number">1</span>, callbacks=<span class="literal">None</span>, validation_data=<span class="literal">None</span>, validation_steps=<span class="literal">None</span>, validation_freq=<span class="number">1</span>, class_weight=<span class="literal">None</span>, max_queue_size=<span class="number">10</span>, workers=<span class="number">1</span>, use_multiprocessing=<span class="literal">False</span>, shuffle=<span class="literal">True</span>, initial_epoch=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+        <h2 id="第20题：有效的括号"><a href="#第20题：有效的括号" class="headerlink" title="第20题：有效的括号"></a>第20题：有效的括号</h2><p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。有效字符串需满足：</p>
+<ol>
+<li>左括号必须用相同类型的右括号闭合。</li>
+<li>左括号必须以正确的顺序闭合。<a id="more"></a>
+==注意空字符串可被认为是有效字符串。==<br><img src="/images/2019/08/07/514a4900-b917-11e9-80cd-11b46d1aba4d.png" alt="image.png"></li>
+</ol>
+<h3 id="思路整理"><a href="#思路整理" class="headerlink" title="思路整理"></a>思路整理</h3><p>这是一个匹配的问题，输入为(),[],{}形式。可以将s划分为前面和后面两个部分，其中前面的部分只能含有“前括号”，如果前面的部分含有“后括号”可以直接==return false==。遍历s，对应前半部分生成一个stack，每次遍历都先push进去s[i]“前括号”对应的“后括号”。当遍历遇到“后括号”时，就开始对stack.pop，然后判读stack.pop的值和s[i]是不是相同，不相同就==return false==（前面push进去的是“前括号”对应的“后括号”），所以应当相同，并且数目也必须相同（stack最后能pop为一个空栈，如果不为空，则==return false==),最后如果stack能为空栈，则==return true==。</p>
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>栈是数据结构的一种，具有先进后出的特性。本题就是巧妙利用栈的先进后出的特性来解决问题的。</p>
+<h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><p>Java中遍历一个字符，可以使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">char</span> c:s.toCharArray())</span><br></pre></td></tr></table></figure>
 
-<p>fit_generator主要是用于解决加载巨大数据内存不足的问题，也可以用来进行数据增强，许多和model.fit()很相似，只介绍几个关键的。</p>
-<a id="more"></a>
-<h3 id="generator"><a href="#generator" class="headerlink" title="generator"></a>generator</h3><p>生成器，用于生成数据（训练/验证/测试）。</p>
-<h3 id="steps-per-epoch"><a href="#steps-per-epoch" class="headerlink" title="steps_per_epoch"></a>steps_per_epoch</h3><p>可以理解为一个周期的batch数目，通常设置为n_train/batch_size的大小。</p>
-<p>模型的训练过程中，需要理解一下几个值的意义：<br>①epoch ②iteration ③batchsize<br>通常模型在训练过程中，每次都是采用batch_size个训练样本去训练模型（根据这batch_size个样本的梯度去训练），使用一次batch_size训练一次，完成一次iteration。模型训练完成一个epoch，所有的训练样本参与训练一次（且仅一次），此时完成的迭代数目 = n_train / batch_size个，所以我的理解是steps_per_epoch指的就是迭代数目（iteration ）</p>
-<h2 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h2><p>由于可能涉及保密，不贴代码，只记录调试过程。</p>
-<p>首先遇到了训练过程中损失为nan的情况，这种情况的主要原因有以下几个：<br>1.学习率不合适，学习率过大<br>2.网络模型搭建不合理，比如激活函数，添加BN等<br>3.输入数据的问题，可能数据本身就有nan值，或者空值。<br>检查了实验的学习率以及网络结构，根据经验判断，均不存在明显问题，并且实验过程中，在第一个epoch的时候，损失正常，但是到第二个epoch损失就直接为nan了，分析原因可能在第一个epoch和第二个epoch之间，可能是数据加载存在问题。<br>设置断点调试：<br><img src="/images/2019/08/16/467e8ab0-c022-11e9-bdb5-0b0b07a3432e.png" alt="image.png"><br>在第一个epoch结束的时候，batch_x变为了一个空的列表，所以损失为nan了。为什么会为空的列表，原始数据本身不是空，应该是在取batch的时候出了问题。<br><img src="/images/2019/08/16/96754680-c022-11e9-bdb5-0b0b07a3432e.png" alt="image.png"><br>i的范围是0-75一共76个，但是需要75次迭代就可以，所以不应该+1，找到bug之处！修改完毕之后，程序可以正常运行，接下来就开始进行数据增强操作了。</p>
-
+<p>Java中定义一个字符型的栈，可以使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stack&lt;Character&gt; stack = <span class="keyword">new</span> Stack&lt;Character&gt;();</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -436,8 +415,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/14/Leetcode-67-二进制加法/" rel="next" title="Leetcode -67 二进制加法">
-                <i class="fa fa-chevron-left"></i> Leetcode -67 二进制加法
+              <a href="/2019/09/24/数学建模：多约束条件下智能飞行器航迹快速规划/" rel="next" title="数学建模：多约束条件下智能飞行器航迹快速规划">
+                <i class="fa fa-chevron-left"></i> 数学建模：多约束条件下智能飞行器航迹快速规划
               </a>
             
           </div>
@@ -445,10 +424,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/18/Leetcode-69-x的平方根/" rel="prev" title="Leetcode -69 x的平方根">
-                Leetcode -69 x的平方根 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -576,7 +551,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数参数说明"><span class="nav-number">1.</span> <span class="nav-text">函数参数说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#generator"><span class="nav-number">1.1.</span> <span class="nav-text">generator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#steps-per-epoch"><span class="nav-number">1.2.</span> <span class="nav-text">steps_per_epoch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#debug"><span class="nav-number">2.</span> <span class="nav-text">debug</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第20题：有效的括号"><span class="nav-number">1.</span> <span class="nav-text">第20题：有效的括号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路整理"><span class="nav-number">1.1.</span> <span class="nav-text">思路整理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈"><span class="nav-number">1.2.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java"><span class="nav-number">1.3.</span> <span class="nav-text">Java</span></a></li></ol></li></ol></div>
             
 
           </div>
