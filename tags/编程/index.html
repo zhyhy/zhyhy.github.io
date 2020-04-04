@@ -6,24 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Leetcode -101 对称的树 | zhyhy</title>
+  <title>Tag: 编程 | zhyhy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目描述给定一个二叉树，检查它是否是镜像对称的。例如，二叉树 [1,2,2,3,4,4,3] 是对称的。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode -101 对称的树">
-<meta property="og:url" content="http://yoursite.com/2019/08/25/Leetcode-101-对称的树/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="zhyhy">
+<meta property="og:url" content="http://yoursite.com/tags/编程/index.html">
 <meta property="og:site_name" content="zhyhy">
-<meta property="og:description" content="题目描述给定一个二叉树，检查它是否是镜像对称的。例如，二叉树 [1,2,2,3,4,4,3] 是对称的。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/25/c3332940-c689-11e9-a27e-01c676ecf570.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/25/d079e760-c689-11e9-a27e-01c676ecf570.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/25/a88a1940-c68a-11e9-a27e-01c676ecf570.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/25/b4276d20-c68a-11e9-a27e-01c676ecf570.png">
-<meta property="og:updated_time" content="2019-09-03T14:20:00.362Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode -101 对称的树">
-<meta name="twitter:description" content="题目描述给定一个二叉树，检查它是否是镜像对称的。例如，二叉树 [1,2,2,3,4,4,3] 是对称的。">
-<meta name="twitter:image" content="http://yoursite.com/images/2019/08/25/c3332940-c689-11e9-a27e-01c676ecf570.png">
+<meta name="twitter:title" content="zhyhy">
   
     <link rel="alternative" href="/atom.xml" title="zhyhy" type="application/atom+xml">
   
@@ -77,7 +68,7 @@
 			</ul>
 		</nav>
 		<nav>
-    	总文章数 34
+    	总文章数 19
 		</nav>
 
 		<nav class="header-smart-menu">
@@ -160,202 +151,71 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Leetcode-101-对称的树" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Leetcode -101 对称的树
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/09/05/Keras中模型的保存于加载/" class="archive-article-date">
+  	<time datetime="2019-09-05T14:11:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-05</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/09/05/Keras中模型的保存于加载/">Keras中模型的保存于加载</a>
     </h1>
   
 
-        
-        <a href="/2019/08/25/Leetcode-101-对称的树/" class="archive-article-date">
-  	<time datetime="2019-08-24T16:11:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个二叉树，检查它是否是镜像对称的。<br>例如，二叉树 [1,2,2,3,4,4,3] 是对称的。</p>
-<a id="more"></a>
-<p><img src="/images/2019/08/25/c3332940-c689-11e9-a27e-01c676ecf570.png" alt="image.png"><br>但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:<br><img src="/images/2019/08/25/d079e760-c689-11e9-a27e-01c676ecf570.png" alt="image.png"></p>
-<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>对于树的问题，常用的方法是递归的方法，把树看成一个整体。<br>从根节点开始分析，root.left.val=root.right.val时，对称；然后左孩子的左孩子和右孩子的右孩子相等，左孩子的右孩子和右孩子的左节点相同，，递归调用！</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> helper(root,root);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">helper</span><span class="params">(TreeNode node1, TreeNode node2)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node1==<span class="keyword">null</span>&amp;&amp;node2==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(node1==<span class="keyword">null</span>||node2==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> (node1.val==node2.val) &amp;&amp; helper(node1.left,node2.right) &amp;&amp;helper(node1.right,node2.left);      </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p><img src="/images/2019/08/25/a88a1940-c68a-11e9-a27e-01c676ecf570.png" alt="image.png"><br>成功！<br><img src="/images/2019/08/25/b4276d20-c68a-11e9-a27e-01c676ecf570.png" alt="image.png"><br>成功！</p>
-<h2 id="递归调用真的好棒，也挺难理解的，明天仔细看看，后天写篇blog，晚安！"><a href="#递归调用真的好棒，也挺难理解的，明天仔细看看，后天写篇blog，晚安！" class="headerlink" title="递归调用真的好棒，也挺难理解的，明天仔细看看，后天写篇blog，晚安！"></a>递归调用真的好棒，也挺难理解的，明天仔细看看，后天写篇blog，晚安！</h2>
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    
-    <div style="text-align:center;color: #00BFFF;font-size:14px;">
-    -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
-    </div>
-    
-
-
-
-    <div class="article-info article-info-index">
-      
-      
-      <!-- 开始添加阅读量-->
-      
-      <span id="busuanzi_container_page_pv">
-      |  阅读量<span id="busuanzi_value_page_pv"></span>次
-      </span>
-      
-      <!-- 添加完成 -->
-
-
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/3-LeetCode//" class="article-tag-list-link color2">3. LeetCode</a>
+        			<a href="/categories/Kears//" class="article-tag-list-link color1">Kears</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/25/Leetcode-101-对称的树/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/08/25/Leetcode-104-树的深度/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Leetcode -104 树的深度
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/08/22/Leetcode-100-相同的树/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Leetcode -100 相同的树</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -391,9 +251,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -455,6 +315,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>

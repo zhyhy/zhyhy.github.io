@@ -6,25 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Leetcode -100 相同的树 | zhyhy</title>
+  <title>tags | zhyhy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目描述给定两个二叉树，编写一个函数来检验他们是否相同。如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode -100 相同的树">
-<meta property="og:url" content="http://yoursite.com/2019/08/22/Leetcode-100-相同的树/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="tags">
+<meta property="og:url" content="http://yoursite.com/tags/index.html">
 <meta property="og:site_name" content="zhyhy">
-<meta property="og:description" content="题目描述给定两个二叉树，编写一个函数来检验他们是否相同。如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/22/a4bca990-c4f5-11e9-b518-8b4409e7c1d9.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/22/ab867c60-c4f5-11e9-b518-8b4409e7c1d9.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/22/b46b18e0-c4f5-11e9-b518-8b4409e7c1d9.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/23/068a6490-c4f7-11e9-b518-8b4409e7c1d9.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/23/14434570-c4f7-11e9-b518-8b4409e7c1d9.png">
-<meta property="og:updated_time" content="2019-09-03T14:20:06.669Z">
+<meta property="og:updated_time" content="2020-04-04T02:46:35.201Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode -100 相同的树">
-<meta name="twitter:description" content="题目描述给定两个二叉树，编写一个函数来检验他们是否相同。如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。">
-<meta name="twitter:image" content="http://yoursite.com/images/2019/08/22/a4bca990-c4f5-11e9-b518-8b4409e7c1d9.png">
+<meta name="twitter:title" content="tags">
   
     <link rel="alternative" href="/atom.xml" title="zhyhy" type="application/atom+xml">
   
@@ -78,7 +69,7 @@
 			</ul>
 		</nav>
 		<nav>
-    	总文章数 34
+    	总文章数 19
 		</nav>
 
 		<nav class="header-smart-menu">
@@ -161,20 +152,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Leetcode-100-相同的树" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Leetcode -100 相同的树
+      tags
     </h1>
   
 
         
-        <a href="/2019/08/22/Leetcode-100-相同的树/" class="archive-article-date">
-  	<time datetime="2019-08-22T15:57:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-22</time>
+        <a href="/tags/index.html" class="archive-article-date">
+  	<time datetime="2020-04-03T10:10:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-03</time>
 </a>
         
 
@@ -184,17 +175,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定两个二叉树，编写一个函数来检验他们是否相同。<br>如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。</p>
-<a id="more"></a>
-<h2 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h2><p><img src="/images/2019/08/22/a4bca990-c4f5-11e9-b518-8b4409e7c1d9.png" alt="image.png"></p>
-<h2 id="例子2"><a href="#例子2" class="headerlink" title="例子2"></a>例子2</h2><p><img src="/images/2019/08/22/ab867c60-c4f5-11e9-b518-8b4409e7c1d9.png" alt="image.png"></p>
-<h2 id="例子3"><a href="#例子3" class="headerlink" title="例子3"></a>例子3</h2><p><img src="/images/2019/08/22/b46b18e0-c4f5-11e9-b518-8b4409e7c1d9.png" alt="image.png"></p>
-<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>树是数据结构的一种，在树种，树的根节点和左右等节点是一棵树，树的左节点和左节点的左右节点又是一颗树，同理右节点也类似。所以，可以递归的使用function，对左右节点和根节点进行相同的操作。比如此题，先判断根节点的val是否相同，然后递归使用函数，判断左节点的val是否相同，右节点的val是否相同，只有当左节点和右节点根节点都相同时，才返回true，其余均返回false，代码实现如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSameTree</span><span class="params">(TreeNode p, TreeNode q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(p==<span class="keyword">null</span>&amp;&amp;q==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(p==<span class="keyword">null</span>||q==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(p.val==q.val)</span><br><span class="line">            <span class="keyword">return</span> isSameTree(p.left,q.left)&amp;&amp;isSameTree(p.right,q.right);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p><img src="/images/2019/08/23/068a6490-c4f7-11e9-b518-8b4409e7c1d9.png" alt="image.png"><br>成功！！<br><img src="/images/2019/08/23/14434570-c4f7-11e9-b518-8b4409e7c1d9.png" alt="image.png"><br>提交通过！！</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>因为最近刷了不少树的题，发现在树中经常使用的方法就是递归，因为根节点和左孩子、右孩子都可以看成一个独立的树！！！好久没有更新博客了，加油！！！</p>
-
+        
       
 
       
@@ -241,17 +222,6 @@
 
 
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/3-LeetCode//" class="article-tag-list-link color2">3. LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -301,7 +271,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/22/Leetcode-100-相同的树/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/tags/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -313,25 +283,6 @@
 </article>
 
   
-<nav id="article-nav">
-  
-    <a href="/2019/08/25/Leetcode-101-对称的树/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Leetcode -101 对称的树
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/08/18/Leetcode-88-合并两个有序数组/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Leetcode -88 合并两个有序数组</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -395,7 +346,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
@@ -459,6 +410,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>

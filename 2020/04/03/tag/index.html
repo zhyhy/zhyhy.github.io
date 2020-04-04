@@ -6,25 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Leetcode -104 树的深度 | zhyhy</title>
+  <title>tag | zhyhy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目描述给定一个二叉树，找出其最大深度。 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。说明: 叶子节点是指没有子节点的节点。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode -104 树的深度">
-<meta property="og:url" content="http://yoursite.com/2019/08/25/Leetcode-104-树的深度/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="tag">
+<meta property="og:url" content="http://yoursite.com/2020/04/03/tag/index.html">
 <meta property="og:site_name" content="zhyhy">
-<meta property="og:description" content="题目描述给定一个二叉树，找出其最大深度。 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。说明: 叶子节点是指没有子节点的节点。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/25/4ef256b0-c6f6-11e9-afea-ed89ff6f5349.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/25/97dfd040-c6f7-11e9-afea-ed89ff6f5349.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/25/a87a2630-c6f7-11e9-afea-ed89ff6f5349.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/25/aeb85ad0-c6f7-11e9-afea-ed89ff6f5349.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/25/dd570440-c6f7-11e9-afea-ed89ff6f5349.png">
-<meta property="og:updated_time" content="2019-09-03T14:19:53.049Z">
+<meta property="og:updated_time" content="2020-04-03T10:10:17.320Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode -104 树的深度">
-<meta name="twitter:description" content="题目描述给定一个二叉树，找出其最大深度。 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。说明: 叶子节点是指没有子节点的节点。">
-<meta name="twitter:image" content="http://yoursite.com/images/2019/08/25/4ef256b0-c6f6-11e9-afea-ed89ff6f5349.png">
+<meta name="twitter:title" content="tag">
   
     <link rel="alternative" href="/atom.xml" title="zhyhy" type="application/atom+xml">
   
@@ -78,7 +69,7 @@
 			</ul>
 		</nav>
 		<nav>
-    	总文章数 34
+    	总文章数 19
 		</nav>
 
 		<nav class="header-smart-menu">
@@ -161,20 +152,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Leetcode-104-树的深度" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-tag" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Leetcode -104 树的深度
+      tag
     </h1>
   
 
         
-        <a href="/2019/08/25/Leetcode-104-树的深度/" class="archive-article-date">
-  	<time datetime="2019-08-25T05:19:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
+        <a href="/2020/04/03/tag/" class="archive-article-date">
+  	<time datetime="2020-04-03T10:10:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-03</time>
 </a>
         
 
@@ -184,22 +175,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个二叉树，找出其最大深度。</p>
-<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。<br>说明: 叶子节点是指没有子节点的节点。</p>
-<a id="more"></a>
-<h2 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h2><p><img src="/images/2019/08/25/4ef256b0-c6f6-11e9-afea-ed89ff6f5349.png" alt="image.png"></p>
-<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>这道题实在求树的深度，个人感觉是一个挺有意义的题，上篇博文提到过，树的问题可以用递归调用解决（自己调用自己），所以对这道题尝试了递归调用：<br>① 先判断有没有子节点，即node.left &amp;&amp; node.right ==null,如果为空，则返回1<br>② 如果只有一个左节点或右节点，则返回另外一个节点的最大深度，举个例子，如果node.left == null 并且node.right != null,则返回 helper(node.right)+1;<br>③ 如果左右节点都不为null,则返回max(helper(node.right)+1,helper(node.left)+1)</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> helper(root);         </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">helper</span><span class="params">(TreeNode node)</span></span></span><br><span class="line"><span class="function">    </span>&#123;   </span><br><span class="line">        <span class="keyword">if</span>(node.left==<span class="keyword">null</span> &amp;&amp; node.right==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(node.left==<span class="keyword">null</span>) <span class="keyword">return</span> helper(node.right) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(node.right==<span class="keyword">null</span>) <span class="keyword">return</span> helper(node.left) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> Math.max(helper(node.left) + <span class="number">1</span> ,helper(node.right) +<span class="number">1</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p><img src="/images/2019/08/25/97dfd040-c6f7-11e9-afea-ed89ff6f5349.png" alt="image.png"><br>成功！！<br><img src="/images/2019/08/25/a87a2630-c6f7-11e9-afea-ed89ff6f5349.png" alt="image.png"><br>成功！！<br><img src="/images/2019/08/25/aeb85ad0-c6f7-11e9-afea-ed89ff6f5349.png" alt="image.png"><br>提交没有通过！</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(root==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 考虑null的情况</span></span><br><span class="line">        <span class="keyword">return</span> helper(root);         </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">helper</span><span class="params">(TreeNode node)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node.left==<span class="keyword">null</span> &amp;&amp; node.right==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(node.left==<span class="keyword">null</span>) <span class="keyword">return</span> helper(node.right) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(node.right==<span class="keyword">null</span>) <span class="keyword">return</span> helper(node.left) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> Math.max(helper(node.left) + <span class="number">1</span> ,helper(node.right) +<span class="number">1</span>);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/2019/08/25/dd570440-c6f7-11e9-afea-ed89ff6f5349.png" alt="image.png"><br>提交通过！！</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>自己写的代码中，构造了一个helper方法，通过在helper中不断递归调用helper，即可实现求树的最大深度。看了看别人的代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>+Math.max(maxDepth(root.left),maxDepth(root.right));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>大佬就是大佬，几句话就能解决，而我还写了这么多！！！不过思路大体一样，以后要养成对代码进行优化的习惯，代码不仅仅要能够run起来，更要有较强的可读性！！！</p>
-
+        
       
 
       
@@ -295,7 +271,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/25/Leetcode-104-树的深度/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/03/tag/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -309,18 +285,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/25/Leetcode-107-二叉树的层次遍历-II/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Leetcode -107 二叉树的层次遍历 II
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/25/Leetcode-101-对称的树/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Leetcode -101 对称的树</div>
+    <a href="/2019/09/24/数学建模：多约束条件下智能飞行器航迹快速规划/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数学建模：多约束条件下智能飞行器航迹快速规划</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -453,6 +420,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
