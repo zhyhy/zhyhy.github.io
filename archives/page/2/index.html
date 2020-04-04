@@ -6,26 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>理解Python中迭代器、可迭代对象、生成器等 | zhyhy</title>
+  <title>Archives | zhyhy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="平时用Python处理数据比较多，经常遇到迭代器、可迭代对象、生成器等，这篇blog记录一下学习过程。 iter函数首先介绍一下iter函数，iter函数主要有以下三个作用：next，放回序列的下一个元素；如果没有元素了，则抛出StopIteration异常。iter，返回self，以便在应该使用可迭代对象的地方使用迭代器，例如在for循环中。1.检查对象是否实现iter方法，如果实现，就调用它，">
-<meta name="keywords" content="Python">
-<meta property="og:type" content="article">
-<meta property="og:title" content="理解Python中迭代器、可迭代对象、生成器等">
-<meta property="og:url" content="http://yoursite.com/2019/08/26/理解Python中迭代器、可迭代对象、生成器等/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="zhyhy">
+<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
 <meta property="og:site_name" content="zhyhy">
-<meta property="og:description" content="平时用Python处理数据比较多，经常遇到迭代器、可迭代对象、生成器等，这篇blog记录一下学习过程。 iter函数首先介绍一下iter函数，iter函数主要有以下三个作用：next，放回序列的下一个元素；如果没有元素了，则抛出StopIteration异常。iter，返回self，以便在应该使用可迭代对象的地方使用迭代器，例如在for循环中。1.检查对象是否实现iter方法，如果实现，就调用它，">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/26/eb15f560-c804-11e9-8f81-e19ea0014b34.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/26/10fd5710-c809-11e9-8f81-e19ea0014b34.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/26/53af0d00-c80a-11e9-8f81-e19ea0014b34.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/26/9e4cdf90-c814-11e9-8f81-e19ea0014b34.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/26/b82f0b30-c815-11e9-8f81-e19ea0014b34.png">
-<meta property="og:updated_time" content="2020-04-04T03:20:46.121Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="理解Python中迭代器、可迭代对象、生成器等">
-<meta name="twitter:description" content="平时用Python处理数据比较多，经常遇到迭代器、可迭代对象、生成器等，这篇blog记录一下学习过程。 iter函数首先介绍一下iter函数，iter函数主要有以下三个作用：next，放回序列的下一个元素；如果没有元素了，则抛出StopIteration异常。iter，返回self，以便在应该使用可迭代对象的地方使用迭代器，例如在for循环中。1.检查对象是否实现iter方法，如果实现，就调用它，">
-<meta name="twitter:image" content="http://yoursite.com/images/2019/08/26/eb15f560-c804-11e9-8f81-e19ea0014b34.png">
+<meta name="twitter:title" content="zhyhy">
   
     <link rel="alternative" href="/atom.xml" title="zhyhy" type="application/atom+xml">
   
@@ -162,222 +151,63 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-理解Python中迭代器、可迭代对象、生成器等" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      理解Python中迭代器、可迭代对象、生成器等
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/08/06/ML-DL/" class="archive-article-date">
+  	<time datetime="2019-08-06T10:22:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-06</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/08/06/ML-DL/">ML/DL/CV</a>
     </h1>
   
 
-        
-        <a href="/2019/08/26/理解Python中迭代器、可迭代对象、生成器等/" class="archive-article-date">
-  	<time datetime="2019-08-26T13:45:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-26</time>
-</a>
-        
-
-
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>平时用Python处理数据比较多，经常遇到迭代器、可迭代对象、生成器等，这篇blog记录一下学习过程。</p>
-<h2 id="iter函数"><a href="#iter函数" class="headerlink" title="iter函数"></a>iter函数</h2><p>首先介绍一下iter函数，iter函数主要有以下三个作用：<br>next，放回序列的下一个元素；如果没有元素了，则抛出StopIteration异常。<br>iter，返回self，以便在应该使用可迭代对象的地方使用迭代器，例如在for循环中。<br>1.检查对象是否实现<strong>iter</strong>方法，如果实现，就调用它，生成一个生成器。<br>2.没有<strong>iter</strong>方法，则看有没有<strong>getitem</strong>方法，Python会创建一个迭代器，尝试按顺序（从0）开始获取元素。<br>3.如果失败，则返回TypeError异常，通常”C object is not iterable”</p>
-<a id="more"></a>
-<h2 id="可迭代对象"><a href="#可迭代对象" class="headerlink" title="可迭代对象"></a>可迭代对象</h2><p>使用iter内置函数可以获取迭代器的对象。如果对象实现了能返回迭代器的<strong>iter</strong>方法，则该对象可迭代；如果实现了<strong>getitem</strong>方法，且参数从零开始索引，可以迭代。<br><strong>说明一下可迭代对象和迭代器之间的关系：Python通过iter()函数可以从可迭代对象中获取迭代器。</strong></p>
-<p>常见的可迭代对象：<br>1.可以用于for循环的对象<br>2.可以用next()函数的对象<br>3.集合数据类型如list、dict、str是可迭代对象，不是迭代器。</p>
-<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>标准的迭代器有两个方法：next和ite。next方法，返回序列的下一个元素；如果没有元素了，则抛出StopIteration异常。iter方法，返回self，以便在应该使用可迭代对象的地方使用迭代器，例如在for循环中。<br><img src="/images/2019/08/26/eb15f560-c804-11e9-8f81-e19ea0014b34.png" alt="image.png"><br>Irerable:可迭代对象。可以用过iter()内置方法，检查是否实现<strong>iter</strong>方法，如果有，则通过<strong>iter</strong>方法获取该对象的迭代器。<br>Iterator:迭代器。实现了<strong>next</strong>和<strong>iter</strong>方法，两个方法的作用如上文所述。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> reprlib</span><br><span class="line">RE_WORD = re.compile(<span class="string">'\w+'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sentence</span>:</span></span><br><span class="line">	def__init__(self,text):</span><br><span class="line">		self.text =  text</span><br><span class="line">		self.words = RE_WORD.findall(text)</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">'Sentence(%s)'</span> %reprlib.repr(self.text)</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span>  <span class="comment"># Sentence的iter方法，该方法返回一个迭代器</span></span><br><span class="line">		<span class="keyword">return</span> SentenceIterator(self.words)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SentenceIterator</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,word)</span>:</span></span><br><span class="line">		self.words = word</span><br><span class="line">		self.index = <span class="number">0</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span> <span class="comment"># SentenceIterator是一个迭代器，必须有next方法</span></span><br><span class="line">		<span class="keyword">try</span>:</span><br><span class="line">			word = self.words[self.index]</span><br><span class="line">		<span class="keyword">except</span> IndexError:</span><br><span class="line">			<span class="keyword">raise</span> StopIteration()</span><br><span class="line">		self.index += <span class="number">1</span></span><br><span class="line">		<span class="keyword">return</span> word</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> self</span><br></pre></td></tr></table></figure>
-
-<p><strong>Sentence是可迭代对象，实现了<strong>iter</strong>方法，该方法返回一个迭代器<br>SentenceIterator是迭代器，实现<strong>next</strong>和<strong>iter</strong>。</strong><br><strong>本例子说明：可迭代对象有个<strong>iter</strong>方法，并且每次都实例化一个新的迭代器；迭代器需要实现<strong>next</strong>方法，返回单个元素，此外还要实现<strong>iter</strong>方法，返回迭代器本身（self）。</strong></p>
-<p><strong>一般来说，可迭代对象必须有<strong>iter</strong>方法，不能有<strong>_next</strong>方法</strong><br>*<em>一般来说，迭代器必须有<strong>next</strong>方法 *</em></p>
-<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><p>1.什么是生成器？<br>    通过列表生成式，我们可以直接创建一个列表。但是，受到内存限制，列表容量肯定是有限的。而且，创建一个包含100万个元素的列表，不仅占用很大的存储空间，如果我们仅仅需要访问前面几个元素，那后面绝大多数元素占用的空间都白白浪费了。<br>    所以，如果列表元素可以按照某种算法推算出来，那我们是否可以在循环的过程中不断推算出后续的元素呢？这样就不必创建完整的list，从而节省大量的空间。在Python中，这种一边循环一边计算的机制，称为生成器（Generator）。<br>2.生成器函数<br>    在Python中，函数定义体中有yield关键字，就是生成器函数，调用该函数，返回一个生成器对象。和一般的函数不同，生成器函数会随着时间的推移产生一个数字队列。一般的函数在执行完成之后，通常会返回一个值，然后退出，生成器函数则是会使用yield关键字，给调用者返回一个值之后，保存当前信息，再次调用生成器时，从上次退出的yield继续执行。<br>    生成器和迭代协议是密切相关的，迭代器都有一个<strong>next</strong>()__成员方法，这个方法要么返回迭代的下一项，要买引起异常结束迭代。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_AB</span><span class="params">()</span>:</span> </span><br><span class="line">     print(<span class="string">'start'</span>)</span><br><span class="line">     <span class="keyword">yield</span> <span class="string">'A'</span>	<span class="comment"># ②</span></span><br><span class="line">     print(<span class="string">'continue'</span>)</span><br><span class="line">     <span class="keyword">yield</span> <span class="string">'B'</span> <span class="comment"># ③</span></span><br><span class="line">     print(<span class="string">'end.'</span>) <span class="comment"># ④</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> gen_AB(): <span class="comment"># ⑤</span></span><br><span class="line">     print(<span class="string">'--&gt;'</span>,c)</span><br></pre></td></tr></table></figure>
-
-<p>下面给出调试结果：<br><img src="/images/2019/08/26/10fd5710-c809-11e9-8f81-e19ea0014b34.png" alt="image.png"><br>② for 循环中第一次隐式调用next()函数（序号⑤），会打印start,然后停再第一个yield语句中。<br>③第二次隐式调用next()函数（序号⑤），打印continue，停在第二个yield语句。<br>④第三次隐式调用next()函数，打印end，然后到达函数体的末尾，生成器对象会抛出StopIterationb异常，但是for循环（序号⑤）会捕捉到此次异常，所以循环终止并且没有报错。</p>
-<h2 id="生成器表达式"><a href="#生成器表达式" class="headerlink" title="生成器表达式"></a>生成器表达式</h2><p><img src="/images/2019/08/26/53af0d00-c80a-11e9-8f81-e19ea0014b34.png" alt="image.png"><br><img src="/images/2019/08/26/9e4cdf90-c814-11e9-8f81-e19ea0014b34.png" alt="image.png"></p>
-<p>注意生成的res1是一个列表，这种生成列表的方法也叫做列表解析生成列表。<br>Res2是一个生成器，只有for循环迭代res2时候gen_AB()函数的定义体才会真正执行。For循环每次迭代时会隐式调用next(res2)，前进到gen_AB函数的下一个yield语句。</p>
-<p>二者转换：<br><img src="/images/2019/08/26/b82f0b30-c815-11e9-8f81-e19ea0014b34.png" alt="image.png"></p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    
-    <div style="text-align:center;color: #00BFFF;font-size:14px;">
-    -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
-    </div>
-    
-
-
-
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      <!-- 开始添加阅读量-->
-      
-      <span id="busuanzi_container_page_pv">
-      |  阅读量<span id="busuanzi_value_page_pv"></span>次
-      </span>
-      
-      <!-- 添加完成 -->
-
-
-      
+        <div class="article-info info-on-right">
+          
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
+        			<a href="/categories/1-ML-DL-CV//" class="article-tag-list-link color2">1. ML/DL/CV</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/26/理解Python中迭代器、可迭代对象、生成器等/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/08/28/理解Python中self的用法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          理解Python中self的用法
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/08/16/Keras中fit-generator-函数，以及梯度为nan的解决方法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Keras中fit_generator()函数，以及梯度为nan的解决方法</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -414,8 +244,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
