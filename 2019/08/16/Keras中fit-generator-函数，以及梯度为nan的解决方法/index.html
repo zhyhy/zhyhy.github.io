@@ -9,6 +9,7 @@
   <title>Keras中fit_generator()函数，以及梯度为nan的解决方法 | zhyhy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="最近需要做一个数据增强的DL实验，需要在每个batch时候对训练数据进行数据增强（添加一些虚假点），以此学习了kears中model.fit_generator()函数，在模型训练的时候，记录一下学习过程以及调试的过程。 函数参数说明1fit_generator(generator, steps_per_epoch=None, epochs=1, verbose=1, callbacks=None">
+<meta name="keywords" content="Keras">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Keras中fit_generator()函数，以及梯度为nan的解决方法">
 <meta property="og:url" content="http://yoursite.com/2019/08/16/Keras中fit-generator-函数，以及梯度为nan的解决方法/index.html">
@@ -17,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/2019/08/16/467e8ab0-c022-11e9-bdb5-0b0b07a3432e.png">
 <meta property="og:image" content="http://yoursite.com/images/2019/08/16/96754680-c022-11e9-bdb5-0b0b07a3432e.png">
-<meta property="og:updated_time" content="2019-09-03T14:12:01.286Z">
+<meta property="og:updated_time" content="2020-04-04T03:20:30.966Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Keras中fit_generator()函数，以及梯度为nan的解决方法">
 <meta name="twitter:description" content="最近需要做一个数据增强的DL实验，需要在每个batch时候对训练数据进行数据增强（添加一些虚假点），以此学习了kears中model.fit_generator()函数，在模型训练的时候，记录一下学习过程以及调试的过程。 函数参数说明1fit_generator(generator, steps_per_epoch=None, epochs=1, verbose=1, callbacks=None">
@@ -228,6 +229,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Keras</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       <!-- 开始添加阅读量-->
       
       <span id="busuanzi_container_page_pv">
@@ -243,7 +255,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/消除BUG//" class="article-tag-list-link color1">消除BUG</a>
+        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
         		</li>
       		
 		</ul>
@@ -458,7 +470,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+                <a href="javascript:void(0)" class="js-tag color1">Keras</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">思考</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>
