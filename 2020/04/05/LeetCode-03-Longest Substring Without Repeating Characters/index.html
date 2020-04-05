@@ -9,7 +9,7 @@
   <title>LeetCode-03-Longest Substring Without Repeating Characters | zhyhy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="LeetCode-03-Longest Substring Without Repeating Characters">
-<meta name="keywords" content="字符串，哈希表">
+<meta name="keywords" content="字符串，哈希表，滑动窗口">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode-03-Longest Substring Without Repeating Characters">
 <meta property="og:url" content="http://yoursite.com/2020/04/05/LeetCode-03-Longest Substring Without Repeating Characters/index.html">
@@ -17,7 +17,9 @@
 <meta property="og:description" content="LeetCode-03-Longest Substring Without Repeating Characters">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405105742.png">
-<meta property="og:updated_time" content="2020-04-05T02:59:40.500Z">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405110753.png">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405110932.png">
+<meta property="og:updated_time" content="2020-04-05T03:11:18.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode-03-Longest Substring Without Repeating Characters">
 <meta name="twitter:description" content="LeetCode-03-Longest Substring Without Repeating Characters">
@@ -187,11 +189,36 @@
 <p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405105742.png" alt="image-20200405105741454"></p>
 <p>链接：<a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/</a></p>
 <p><strong>思路分析：</strong></p>
-<p><strong>正确思路：</strong></p>
-<p><strong>代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这道题主要用到思路是：<strong>滑动窗口</strong></p>
+<p>什么是滑动窗口？</p>
+<p>其实就是一个队列,比如例题中的 <strong>abcabcbb</strong>，进入这个队列（窗口）为 <strong>abc</strong> 满足题目要求，当再进入 <strong>a</strong>，队列变成了 <strong>abca</strong>，这时候不满足要求。所以，我们要移动这个队列！</p>
+<p>如何移动？</p>
+<p>我们只要把队列的左边的元素移出就行了，直到满足题目要求！</p>
+<p>一直维持这样的队列，找出队列出现最长的长度时候，求出解！</p>
+<p>时间复杂度：<strong><em>O</em>(<em>n</em>)</strong></p>
+<h4 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h4><p><strong>代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.length()==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        HashMap&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;Character, Integer&gt;();</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i ++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(map.containsKey(s.charAt(i)))&#123;</span><br><span class="line">                left = Math.max(left,map.get(s.charAt(i)) + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            map.put(s.charAt(i),i);</span><br><span class="line">            max = Math.max(max,i-left+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>AC记录：</strong></p>
+<p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405110753.png" alt="image-20200405110752377"></p>
+<h4 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h4><p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.length();</span><br><span class="line">        Set&lt;Character&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>, i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;n &amp; j&lt;n)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!set.contains(s.charAt(j)))</span><br><span class="line">            &#123;</span><br><span class="line">                set.add(s.charAt(j));</span><br><span class="line">                ans = Math.max(ans, j - i + <span class="number">1</span>);</span><br><span class="line">                j = j+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                set.remove(s.charAt(i));</span><br><span class="line">                i=i+<span class="number">1</span>;</span><br><span class="line">            &#125;  </span><br><span class="line">            </span><br><span class="line">            <span class="comment">// System.out.println(set);</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>AC记录</strong></p>
+<p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405110932.png" alt="image-20200405110931187"></p>
+<p><strong>总结：</strong></p>
+<p>滑动窗口是一种比较常见的题，多加练习：</p>
+<p><a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/" target="_blank" rel="noopener">3. 无重复字符的最长子串</a></p>
+<p><a href="https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/" target="_blank" rel="noopener">30. 串联所有单词的子串</a></p>
+<p><a href="https://leetcode-cn.com/problems/minimum-window-substring/" target="_blank" rel="noopener">76. 最小覆盖子串</a></p>
+<p><a href="https://leetcode-cn.com/problems/longest-substring-with-at-most-two-distinct-characters/" target="_blank" rel="noopener">159. 至多包含两个不同字符的最长子串</a></p>
+<p><a href="https://leetcode-cn.com/problems/minimum-size-subarray-sum/" target="_blank" rel="noopener">209. 长度最小的子数组</a></p>
+<p><a href="https://leetcode-cn.com/problems/sliding-window-maximum/" target="_blank" rel="noopener">239. 滑动窗口最大值</a></p>
+<p><a href="https://leetcode-cn.com/problems/permutation-in-string/" target="_blank" rel="noopener">567. 字符串的排列</a></p>
+<p><a href="https://leetcode-cn.com/problems/smallest-range/" target="_blank" rel="noopener">632. 最小区间</a></p>
+<p><a href="https://leetcode-cn.com/problems/minimum-window-subsequence/" target="_blank" rel="noopener">727. 最小窗口子序列</a></p>
+<p><strong>参考链接：</strong></p>
+<p><a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/hua-dong-chuang-kou-by-powcai/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/hua-dong-chuang-kou-by-powcai/</a></p>
 
       
 
@@ -234,7 +261,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">字符串，哈希表</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">字符串，哈希表，滑动窗口</a>
         		</li>
       		
 		</ul>
@@ -473,15 +500,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">字符串，哈希表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">思考</a>
+                <a href="javascript:void(0)" class="js-tag color3">字符串，哈希表，滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">思考</a>
               </li>
              
               <li class="article-tag-list-item">
