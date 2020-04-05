@@ -27,7 +27,10 @@
 <meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405083847.gif">
 <meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405085018.png">
 <meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405085032.png">
-<meta property="og:updated_time" content="2020-04-05T00:54:18.432Z">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405090923.png">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405093003.png">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405093020.png">
+<meta property="og:updated_time" content="2020-04-05T01:30:41.319Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zhyhy">
 <meta name="twitter:description" content="十大排序算法之前一直都在学习排序算法，但是没有做一个记录，这篇博文就会对排序算法做一个系统的总结，并且会利用代码实现十大排序算，将结合LeetCode912来验证。LeetCode链接：https://leetcode-cn.com/problems/sort-an-array/">
@@ -218,7 +221,7 @@
 <h5 id="性能及特点-1"><a href="#性能及特点-1" class="headerlink" title="性能及特点"></a>性能及特点</h5><p><strong>时间复杂度</strong></p>
 <p>选择排序的时间复杂度是 <img src="https://www.zhihu.com/equation?tex=O%28N%5E2%29" alt="[公式]"> ：假设被排序的数列中有N个数。遍历一趟的时间复杂度是O(N)，需要遍历多少次呢？N-1次因此，选择排序的时间复杂度是 <img src="https://www.zhihu.com/equation?tex=O%28N%5E2%29" alt="[公式]"> 。。</p>
 <p><strong>稳定性</strong></p>
-<p>选择排序是稳定的算法，它满足稳定算法的定义：假设在数列中存在a[i]=a[j]，若在排序之前，a[i]在a[j]前面；并且排序之后，a[i]仍然在a[j]前面。则这个排序算法是稳定的！</p>
+<p>选择排序是不稳定的算法。</p>
 <p><strong>空间复杂度</strong></p>
 <p>不需要额外的空间，<strong>O(1)，**</strong>当空间复杂度要求较高时，可以考虑选择排序；**</p>
 <h5 id="选择排序与冒泡排序哪个效率更高？"><a href="#选择排序与冒泡排序哪个效率更高？" class="headerlink" title="选择排序与冒泡排序哪个效率更高？"></a>选择排序与冒泡排序哪个效率更高？</h5><p><strong>选择排序、冒泡排序都用for（for(if)）结构语句。一般选择排序效率会更高一些。</strong><br> 自我总结分析原因：（更详细情况请参考上面选择排序的时间复杂度）<br> 冒泡排序的思想为每一次排序过程，通过相邻元素的交换，将当前没有排好序中的最大（小）移到数组的最右（左）端。而选择排序的思想也很直观：每一次排序过程，我们获取当前没有排好序中的最大（小）的元素和数组最右（左）端的元素交换，循环这个过程即可实现对整个数组排序。同样数据的情况下，两种算法的循环次数是一样的，但选择排序只有0到1次交换，而冒泡排序只有0到n次交换 。而影响我们算法效率的主要部分是循环和交换，显然，次数越多，效率就越差。选择排序的平均时间复杂度比冒泡排序的稍低。所以相比较而言选择排序效率会更高一些。<strong>选择排序的移动次数比冒泡排序少多了，由于交换所需CPU时间比 比较所需的CPU时间多，n值较小时，选择排序比冒泡排序快</strong></p>
@@ -228,7 +231,7 @@
 <h5 id="选择排序总结："><a href="#选择排序总结：" class="headerlink" title="选择排序总结："></a><strong>选择排序总结</strong>：</h5><ol>
 <li>选择排序的算法时间平均复杂度为 O(n²)。</li>
 <li>空间复杂度为 O(1)。</li>
-<li>选择排序为稳定排序。</li>
+<li>选择排序为不稳定排序。</li>
 <li>相比如冒泡排序，两者循环次数更少，但是交换的次数选择排序更少。</li>
 </ol>
 <p>参考链接：</p>
@@ -258,15 +261,52 @@
 <p>参考链接：</p>
 <p><a href="https://www.runoob.com/w3cnote/insertion-sort.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/insertion-sort.html</a></p>
 <p><a href="https://www.jianshu.com/p/c49884d8805e" target="_blank" rel="noopener">https://www.jianshu.com/p/c49884d8805e</a></p>
-<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><p>希尔排序，也成递减增量排序算法，是插入排序的一种更高效的改进版本。希尔排序是基于插入排序以下两点性质而提出改进的方法：</p>
+<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><p>希尔排序，也成递减增量排序算法，是插入排序的一种更高效的改进版本。</p>
+<p><strong>关于增量</strong><br>最佳增量值的选择其实是个数学难题，有兴趣的可以自己搜下相关资料。<br>常用的增量有 n/2(这个又叫希尔增量)、n/3、2^k-1(hibbard增量)等，实际使用中稍微改版增量也可能使排序的性能产生很大的波动。比如使用n/2的增量，就是初始增量就是 length/2 ,第二轮分组时就再除2：length/4，直至增量值变成1，希尔排序的基本思想是：先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录”基本有序”时，再对全体记录进行依次直接插入排序。</p>
+<p>希尔排序是基于插入排序以下两点性质而提出改进的方法：</p>
 <ul>
 <li>插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率；</li>
 <li>但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位；</li>
 </ul>
-<p>希尔排序的基本思想是：先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录”基本有序”时，再对全体记录进行依次直接插入排序。</p>
-<h5 id="图例：-2"><a href="#图例：-2" class="headerlink" title="图例："></a>图例：</h5><p>参考链接：</p>
-<p><a href="https://www.runoob.com/w3cnote/shell-sort.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/shell-sort.html</a></p>
+<p>希尔排序是插入排序的高级版：</p>
+<ul>
+<li>希尔排序在排序前：将一个序列<strong>分成了好几个序列</strong></li>
+<li>在第一趟排序时：<strong>将这几个序列做插入排序</strong>。排序后，<strong>部分</strong>较大的数字往后靠，<strong>部分</strong>较小的数字往前靠</li>
+<li>在第二趟排序时：将这个序列又分了好几个序列做插入排序(但比第一次分的数要少,ps:如果第一次分5个，第二次可能就2个了)。排序后，<strong>部分</strong>较大的数字往后靠，<strong>部分</strong>较小的数字往前靠</li>
+<li>…………….</li>
+<li>在第n趟排序时：将这个序列又分了好几个序列(直到剩下一个序列)，从宏观上看，此序列就基本是有序的了。这时就用简单插入排序将数列<strong>直至已序</strong></li>
+</ul>
+<p>从直观上看希尔排序：</p>
+<ul>
+<li><strong>就是把数列进行分组(不停使用插入排序)，直至从宏观上看起来有序，最后插入排序起来就容易了(无须多次移位或交换)。</strong></li>
+</ul>
+<h5 id="图例：-2"><a href="#图例：-2" class="headerlink" title="图例："></a>图例：</h5><p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405090923.png" alt="4233896596-5ab705306c31c_articlex"></p>
+<p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shellSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> length = arr.length;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> step = length / <span class="number">2</span>; step &gt;= <span class="number">1</span>; step /= <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = step; i &lt; length; i++) &#123;</span><br><span class="line">                temp = arr[i];</span><br><span class="line">                <span class="keyword">int</span> j = i - step;</span><br><span class="line">                <span class="keyword">while</span> (j &gt;= <span class="number">0</span> &amp;&amp; arr[j] &gt; temp) &#123;</span><br><span class="line">                    arr[j + step] = arr[j];</span><br><span class="line">                    j -= step;</span><br><span class="line">                &#125;</span><br><span class="line">                arr[j + step] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h5 id="性能及特点-3"><a href="#性能及特点-3" class="headerlink" title="性能及特点"></a>性能及特点</h5><p><strong>时间复杂度</strong></p>
+<p>希尔排序平均效率是O(nlogn)。</p>
+<p><strong>空间复杂度：</strong></p>
+<p>O（1）</p>
+<p><strong>稳定性</strong>：</p>
+<p>不稳定。</p>
+<h5 id="LeetCode-3"><a href="#LeetCode-3" class="headerlink" title="LeetCode:"></a>LeetCode:</h5><p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405093003.png" alt="image-20200405093002711"></p>
+<p><strong>输出:</strong></p>
+<p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405093020.png" alt="image-20200405093018051"></p>
+<p><strong>希尔排序总结：</strong></p>
+<ol>
+<li>时间复杂度：O(nlogn).</li>
+<li>空间复杂度：O(1).</li>
+<li>稳定性：不稳定。</li>
+<li>步长的选择是希尔排序的重要部分。只要最终步长为1任何步长序列都可以工作。算法最开始以一定的步长进行排序。然后会继续以一定步长进行排序，最终算法以步长为1进行排序。当步长为1时，算法变为普通插入排序，这就保证了数据一定会被排序。</li>
+<li>Shell排序比冒泡排序快5倍，比插入排序大致快2倍。Shell排序比起QuickSort，MergeSort，HeapSort慢很多。但是它相对比较简单，它适合于数据量在5000以下并且速度并不是特别重要的场合。它对于数据量较小的数列重复排序是非常好的。</li>
+</ol>
+<p>参考链接：</p>
+<p><a href="https://www.runoob.com/w3cnote/shell-sort.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/shell-sort.html</a></p>
+<p><a href="https://segmentfault.com/a/1190000013967025" target="_blank" rel="noopener">https://segmentfault.com/a/1190000013967025</a></p>
+<p><a href="https://studygolang.com/articles/13855" target="_blank" rel="noopener">https://studygolang.com/articles/13855</a></p>
+<p><a href="https://blog.csdn.net/u013630349/article/details/48250109?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-5&amp;utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-5" target="_blank" rel="noopener">https://blog.csdn.net/u013630349/article/details/48250109?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-5&amp;utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-5</a></p>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3>
       
 
       
