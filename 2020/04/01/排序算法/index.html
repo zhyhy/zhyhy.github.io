@@ -31,7 +31,11 @@
 <meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405090923.png">
 <meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405093003.png">
 <meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405093020.png">
-<meta property="og:updated_time" content="2020-04-05T01:33:14.640Z">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405142538.gif">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405145556.png">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405150829.png">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405150845.png">
+<meta property="og:updated_time" content="2020-04-05T07:11:25.862Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序算法">
 <meta name="twitter:description" content="十大排序算法之前一直都在学习排序算法，但是没有做一个记录，这篇博文就会对排序算法做一个系统的总结，并且会利用代码实现十大排序算，将结合LeetCode912来验证。LeetCode链接：https://leetcode-cn.com/problems/sort-an-array/">
@@ -323,7 +327,37 @@
 <p><a href="https://segmentfault.com/a/1190000013967025" target="_blank" rel="noopener">https://segmentfault.com/a/1190000013967025</a></p>
 <p><a href="https://studygolang.com/articles/13855" target="_blank" rel="noopener">https://studygolang.com/articles/13855</a></p>
 <p><a href="https://blog.csdn.net/u013630349/article/details/48250109?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-5&amp;utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-5" target="_blank" rel="noopener">https://blog.csdn.net/u013630349/article/details/48250109?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-5&amp;utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-5</a></p>
-<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>归并排序（Merge sort）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。</p>
+<h5 id="算法步骤："><a href="#算法步骤：" class="headerlink" title="算法步骤："></a>算法步骤：</h5><ol>
+<li>申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列；</li>
+<li>设定两个指针，最初位置分别为两个已经排序序列的起始位置；</li>
+<li>比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置；</li>
+<li>重复步骤 3 直到某一指针达到序列尾；</li>
+<li>将另一序列剩下的所有元素直接复制到合并序列尾。</li>
+</ol>
+<h5 id="图例：-3"><a href="#图例：-3" class="headerlink" title="图例："></a>图例：</h5><p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405142538.gif" alt="mergeSort"></p>
+<h5 id="具体过程："><a href="#具体过程：" class="headerlink" title="具体过程："></a>具体过程：</h5><p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405145556.png" alt="image-20200405145554918"></p>
+<h5 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a><strong>代码实现：</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> []arr = &#123;<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> []temp = <span class="keyword">new</span> <span class="keyword">int</span>[arr.length];<span class="comment">//在排序前，先建好一个长度等于原数组长度的临时数组，避免递归中频繁开辟空间</span></span><br><span class="line"></span><br><span class="line">    sort(arr,<span class="number">0</span>,arr.length-<span class="number">1</span>,temp);</span><br><span class="line"></span><br><span class="line">    System.out.println(Arrays.toString(arr));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> left,<span class="keyword">int</span> right,<span class="keyword">int</span> []temp)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left&lt;right)&#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (left+right)/<span class="number">2</span>;</span><br><span class="line">        sort(arr,left,mid,temp);<span class="comment">//左边归并排序，使得左子序列有序</span></span><br><span class="line">        sort(arr,mid+<span class="number">1</span>,right,temp);<span class="comment">//右边归并排序，使得右子序列有序</span></span><br><span class="line">        merge(arr,left,mid,right,temp);<span class="comment">//将两个有序子数组合并操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> left,<span class="keyword">int</span> mid,<span class="keyword">int</span> right,<span class="keyword">int</span>[] temp)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = left;<span class="comment">//左序列指针</span></span><br><span class="line">    <span class="keyword">int</span> j = mid+<span class="number">1</span>;<span class="comment">//右序列指针</span></span><br><span class="line">    <span class="keyword">int</span> t = <span class="number">0</span>;<span class="comment">//临时数组指针</span></span><br><span class="line">    <span class="keyword">while</span> (i&lt;=mid &amp;&amp; j&lt;=right)&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i]&lt;=arr[j])&#123;</span><br><span class="line">            temp[t++] = arr[i++];</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            temp[t++] = arr[j++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;=mid)&#123;<span class="comment">//将左边剩余元素填充进temp中</span></span><br><span class="line">        temp[t++] = arr[i++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(j&lt;=right)&#123;<span class="comment">//将右序列剩余元素填充进temp中</span></span><br><span class="line">        temp[t++] = arr[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    t = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//将temp中的元素全部拷贝到原数组中</span></span><br><span class="line">    <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">        arr[left++] = temp[t++];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="性能分析："><a href="#性能分析：" class="headerlink" title="性能分析："></a>性能分析：</h5><p><strong>时间复杂度：</strong></p>
+<p>递归分解数据，需要递归logN次，每次都需要对n个数据扫描一次，最好最坏平均都一样，所以O(nlogn)</p>
+<p><strong>空间复杂度：</strong></p>
+<p>归并排序需要一个临时temp[]来储存归并的结果，所以  O(n) </p>
+<p><strong>稳定性：</strong></p>
+<p>稳定算法。</p>
+<p><strong>LeetCode：</strong></p>
+<p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405150829.png" alt="image-20200405150827917"></p>
+<p><strong>AC记录：</strong></p>
+<p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405150845.png" alt="image-20200405150844182"></p>
+<h5 id="归并排序总结："><a href="#归并排序总结：" class="headerlink" title="归并排序总结："></a>归并排序总结：</h5><ol>
+<li>采用分而治之的思想，先将数组分为开，然后合并。</li>
+<li>时间复杂度O(nlogn)，空间复杂度O(n)，稳定算法。</li>
+</ol>
+<p>参考链接：</p>
+<p><a href="https://www.runoob.com/w3cnote/merge-sort.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/merge-sort.html</a></p>
+<p><a href="https://github.com/ShaoQiBNU/merge-sort" target="_blank" rel="noopener">https://github.com/ShaoQiBNU/merge-sort</a></p>
+<p><a href="https://www.jianshu.com/p/550cf367a5e8" target="_blank" rel="noopener">https://www.jianshu.com/p/550cf367a5e8</a></p>
+
       
 
       
@@ -605,15 +639,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">算法，哈希表，动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">字符串，哈希表，滑动窗口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法，哈希表，动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
