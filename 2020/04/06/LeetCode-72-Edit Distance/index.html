@@ -17,8 +17,9 @@
 <meta property="og:description" content="LeetCode-72-Edit Distance">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406092050.png">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406094015.png">
 <meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406093205.png">
-<meta property="og:updated_time" content="2020-04-06T01:33:41.924Z">
+<meta property="og:updated_time" content="2020-04-06T01:40:42.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode-72-Edit Distance">
 <meta name="twitter:description" content="LeetCode-72-Edit Distance">
@@ -187,9 +188,12 @@
         <h3 id="LeetCode-72-Edit-Distance"><a href="#LeetCode-72-Edit-Distance" class="headerlink" title="LeetCode-72-Edit Distance"></a>LeetCode-72-Edit Distance</h3><a id="more"></a>
 
 <p>题目描述：</p>
-<p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406092050.png" alt="image-20200406092042276"></p>
+<img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406092050.png" alt="image-20200406092042276" style="zoom:67%;">
+
 <p>链接：<a href="https://leetcode-cn.com/problems/edit-distance/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/edit-distance/</a></p>
-<h5 id="思路分析："><a href="#思路分析：" class="headerlink" title="思路分析："></a><strong>思路分析：</strong></h5><p>在最开始，想到了BFS，后来发现是一个计数的问题，然而，动态规划一般就是针对计数问题的，所以尝试用DP来解。</p>
+<h5 id="思路分析："><a href="#思路分析：" class="headerlink" title="思路分析："></a><strong>思路分析：</strong></h5><p>在最开始，想到了BFS，后来发现是一个计数的问题，然而，动态规划一般就是针对计数问题的，所以尝试用DP来解。post一张自己解题过程中的表格填充图：</p>
+<img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406094015.png" alt="image-20200406094014011" style="zoom:67%;">
+
 <p><strong>定义状态方程：</strong></p>
 <p>动态规划中最重要的就是状态方程，题目问的是：将word1转换成word2所用的最少次数，根据动态规划的原则：问什么，就将什么定义为状态方程，定义<code>dp[i][j]</code>为将<code>word1[0,i]</code>转换成<code>word2[0,j]</code>所需要的次数。</p>
 <p><strong>初始化</strong></p>
@@ -207,7 +211,8 @@
 <p>输出就是二维搜索数组的最右下角<code>dp[word1.length()][word2.length()]</code></p>
 <h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a><strong>代码：</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(String word1, String word2)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[word1.length() + <span class="number">1</span>][word2.length() + <span class="number">1</span>];</span><br><span class="line">            <span class="comment">// 初始化，对于第一列和第一行，分别初始化为所在行以及所在列。 </span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= word1.length(); i++) &#123;</span><br><span class="line">                dp[i][<span class="number">0</span>] = i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= word2.length(); j++) &#123;</span><br><span class="line">                dp[<span class="number">0</span>][j] = j;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// dp</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= word1.length(); i++) &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= word2.length(); j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(word1.charAt(i-<span class="number">1</span>) == word2.charAt(j-<span class="number">1</span>)) &#123;</span><br><span class="line">                        dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> &#123;</span><br><span class="line">                        dp[i][j] = Math.min(dp[i-<span class="number">1</span>][j],Math.min(dp[i-<span class="number">1</span>][j-<span class="number">1</span>],dp[i][j-<span class="number">1</span>])) + <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> dp[word1.length()][word2.length()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h5 id="AC记录："><a href="#AC记录：" class="headerlink" title="AC记录："></a><strong>AC记录：</strong></h5><p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406093205.png" alt="image-20200406093204578"></p>
+<h5 id="AC记录："><a href="#AC记录：" class="headerlink" title="AC记录："></a><strong>AC记录：</strong></h5><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406093205.png" alt="image-20200406093204578" style="zoom:67%;">
+
 <p><strong>总结：</strong></p>
 <p>二维动态规划典型题，重点就是在状态方程如何定义以及状态转移方程，在写代码的时候，需要注意初始化，以及根据三种操作（插入，删除、替换）来推导状态转移方程。</p>
 
@@ -483,6 +488,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Keras</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">算法，哈希表，动态规划</a>
               </li>
              
@@ -491,15 +500,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Keras</a>
+                <a href="javascript:void(0)" class="js-tag color3">字符串，哈希表，滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">动态规划，二维动态规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">字符串，哈希表，滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -515,11 +520,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">思考</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">思考</a>
               </li>
              
               <li class="article-tag-list-item">
