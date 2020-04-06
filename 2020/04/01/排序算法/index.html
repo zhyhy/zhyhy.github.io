@@ -35,7 +35,8 @@
 <meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405145556.png">
 <meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405150829.png">
 <meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405150845.png">
-<meta property="og:updated_time" content="2020-04-05T07:29:13.988Z">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406103853.png">
+<meta property="og:updated_time" content="2020-04-06T02:39:37.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序算法">
 <meta name="twitter:description" content="十大排序算法之前一直都在学习排序算法，但是没有做一个记录，这篇博文就会对排序算法做一个系统的总结，并且会利用代码实现十大排序算，将结合LeetCode912来验证。LeetCode链接：https://leetcode-cn.com/problems/sort-an-array/">
@@ -348,9 +349,13 @@
 <p><strong>稳定性：</strong></p>
 <p>稳定算法。</p>
 <p><strong>LeetCode：</strong></p>
-<p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405150829.png" alt="image-20200405150827917"></p>
+<img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405150829.png" alt="image-20200405150827917" style="zoom:67%;">
+
+
+
 <p><strong>AC记录：</strong></p>
-<p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405150845.png" alt="image-20200405150844182"></p>
+<img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405150845.png" alt="image-20200405150844182" style="zoom:67%;">
+
 <h5 id="归并排序总结："><a href="#归并排序总结：" class="headerlink" title="归并排序总结："></a>归并排序总结：</h5><ol>
 <li>采用分而治之的思想，先将数组分为开，然后合并。</li>
 <li>时间复杂度O(nlogn)，空间复杂度O(n)，稳定算法。</li>
@@ -359,7 +364,131 @@
 <p><a href="https://www.runoob.com/w3cnote/merge-sort.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/merge-sort.html</a></p>
 <p><a href="https://github.com/ShaoQiBNU/merge-sort" target="_blank" rel="noopener">https://github.com/ShaoQiBNU/merge-sort</a></p>
 <p><a href="https://www.jianshu.com/p/550cf367a5e8" target="_blank" rel="noopener">https://www.jianshu.com/p/550cf367a5e8</a></p>
-<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>快速排序使用分治法（Divide and conquer）策略来把一个串行（list）分为两个子串行（sub-lists）。</p>
+<p>快速排序又是一种<strong>分而治之</strong>思想在排序算法上的典型应用。<strong>本质上来看，快速排序应该算是在冒泡排序基础上的递归分治法。</strong></p>
+<p>快速排序的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据比另一部分的所有数据要小，再按这种方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，使整个数据变成有序序列。</p>
+<h5 id="算法步骤-2"><a href="#算法步骤-2" class="headerlink" title="算法步骤"></a>算法步骤</h5><ol>
+<li>从数列中挑出一个元素，称为 <strong>“基准”</strong>（<strong>pivot</strong>）;</li>
+<li>重新排序数列，所有元素<strong>比基准值小的摆放在基准前面</strong>，所有元素<strong>比基准值大的摆在基准的后面</strong>（<strong>相同的数可以到任一边</strong>）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；</li>
+<li>再对左右区间重复第二步，直到各区间只有一个数。</li>
+</ol>
+<p>虽然快速排序称为分治法，但分治法这三个字显然无法很好的概括快速排序的全部步骤。因此我的对快速排序作了进一步的说明：<strong>挖坑填数+分治法</strong>：</p>
+<p>以一个数组作为示例，取区间第一个数（72）为基准数。</p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>72</strong></td>
+<td>6</td>
+<td>57</td>
+<td>88</td>
+<td>60</td>
+<td>42</td>
+<td>83</td>
+<td>73</td>
+<td>48</td>
+<td>85</td>
+</tr>
+</tbody></table>
+<p>初始时，i = 0; j = 9;  X = a[i] = 72，</p>
+<p>由于已经将a[0]中的数保存到X中，可以理解成在数组a[0]上挖了个坑，可以将其它数据填充到这来。</p>
+<p>从j开始向前找一个比X小或等于X的数。当j=8，符合条件，将a[8]挖出再填到上一个坑a[0]中。a[0]=a[8]; i++; 这样一个坑a[0]就被搞定了，但又形成了一个新坑a[8]，这怎么办了？简单，再找数字来填a[8]这个坑。这次从<strong>i</strong>开始向后找一个大于X的数，当<strong>i=3</strong>，符合条件，将a[3]挖出再填到上一个坑中a[8]=a[3]; j–;</p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>48</strong></td>
+<td>6</td>
+<td>57</td>
+<td><strong>88</strong></td>
+<td>60</td>
+<td>42</td>
+<td>83</td>
+<td>73</td>
+<td><strong>88</strong></td>
+<td>85</td>
+</tr>
+</tbody></table>
+<p> i = 3;  j = 7;  X=72</p>
+<p>再重复上面的步骤，<strong>先从后向前找，再从前向后找</strong>。</p>
+<p>从j开始向前找，当j=5，符合条件，将a[5]挖出填到上一个坑中，a[3] = a[5]; i++;</p>
+<p>从i开始向后找，当i=5时，由于i==j退出。</p>
+<p>此时，i = j = 5，而a[5]刚好又是上次挖的坑，因此将X填入a[5]。</p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>48</td>
+<td>6</td>
+<td>57</td>
+<td>42</td>
+<td>60</td>
+<td><strong>72</strong></td>
+<td>83</td>
+<td>73</td>
+<td>88</td>
+<td>85</td>
+</tr>
+</tbody></table>
+<p>可以<strong>看出a[5]前面的数字都小于它，a[5]后面的数字都大于它</strong>。因此再对a[0…4]和a[6…9]这二个子区间<strong>重复</strong>上述步骤就可以了。</p>
+<p><strong>代码：</strong></p>
+<p>给出两个代码，两个差的不是太多，第一个是的思路是根据上面说的填坑的思想，第二个是将左边大于基准的和右边小于基准的互换，然后最后将基准填入<code>arr[i]</code>中，个人建议第一种思路。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] sortArray(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        quicksort(nums,<span class="number">0</span>, nums.length - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="keyword">int</span> n[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> dp;</span><br><span class="line">        <span class="keyword">if</span> (left &lt; right) &#123;</span><br><span class="line">            dp = partition(n, left, right);</span><br><span class="line">            quicksort(n, left, dp - <span class="number">1</span>);</span><br><span class="line">            quicksort(n, dp + <span class="number">1</span>, right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span> n[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pivot = n[left];</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">while</span> (left &lt; right &amp;&amp; n[right] &gt;= pivot)</span><br><span class="line">                right--;</span><br><span class="line">            <span class="keyword">if</span> (left &lt; right)</span><br><span class="line">                n[left++] = n[right];	<span class="comment">// 比中轴小的记录移到低端</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (left &lt; right &amp;&amp; n[left] &lt;= pivot)</span><br><span class="line">                left++;</span><br><span class="line">            <span class="keyword">if</span> (left &lt; right)</span><br><span class="line">                n[right--] = n[left];	<span class="comment">// 比中轴大的记录移到高端</span></span><br><span class="line">        &#125;</span><br><span class="line">        n[left] = pivot;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickSort</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">9</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">3</span>,<span class="number">10</span>,<span class="number">4</span>,<span class="number">6</span>&#125;;</span><br><span class="line">    quickSort(arr,<span class="number">0</span>,arr.length - <span class="number">1</span>);</span><br><span class="line">    System.out.println(Arrays.toString(arr));</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p,i,j,temp;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(low &gt;= high) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//p就是基准数,这里就是每个数组的第一个</span></span><br><span class="line">    p = arr[low];</span><br><span class="line">    i = low;</span><br><span class="line">    j = high;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; j) &#123;</span><br><span class="line">        <span class="comment">//右边当发现小于p的值时停止循环</span></span><br><span class="line">        <span class="keyword">while</span>(arr[j] &gt;= p &amp;&amp; i &lt; j) &#123;</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">                        </span><br><span class="line">        <span class="comment">//这里一定是右边开始，上下这两个循环不能调换（下面有解析，可以先想想）    </span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//左边当发现大于p的值时停止循环</span></span><br><span class="line">        <span class="keyword">while</span>(arr[i] &lt;= p &amp;&amp; i &lt; j) &#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">            temp = arr[j];</span><br><span class="line">            arr[j] = arr[i];</span><br><span class="line">            arr[i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[low] = arr[i];<span class="comment">//这里的arr[i]一定是停小于p的，经过i、j交换后i处的值一定是小于p的(j先走)</span></span><br><span class="line">    arr[i] = p; </span><br><span class="line">    quickSort(arr,low,j-<span class="number">1</span>);  <span class="comment">//对左边快排</span></span><br><span class="line">    quickSort(arr,j+<span class="number">1</span>,high); <span class="comment">//对右边快排</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>LeetCode：</strong></p>
+<p>手写快排：</p>
+<img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406103853.png" alt="image-20200406103852501" style="zoom: 80%;">
+
+<p><strong>快排总结：</strong></p>
+<p>快速排序是在冒泡排序的基础上改进而来的，冒泡排序每次只能交换相邻的两个元素，而快速排序是跳跃式的交换，交换的距离很大，因此总的比较和交换次数少了很多，速度也快了不少。</p>
+<p>但是快速排序在最坏情况下的<a href="http://data.biancheng.net/view/2.html" target="_blank" rel="noopener">时间复杂度</a>和冒泡排序一样，是 <code>O(n2)</code>，实际上每次比较都需要交换，但是这种情况并不常见。我们可以思考一下如果每次比较都需要交换，那么数列的平均时间复杂度是 <code>O(nlogn)</code>，事实上在大多数时候，排序的速度要快于这个平均时间复杂度。这种算法实际上是一种分治法思想，也就是分而治之，把问题分为一个个的小部分来分别解决，再把结果组合起来。</p>
+<p>快速排序只是使用数组原本的空间进行排序，所以所占用的空间应该是常量级的，但是由于每次划分之后是递归调用，所以递归调用在运行的过程中会消耗一定的空间，在一般情况下的<a href="http://data.biancheng.net/view/2.html" target="_blank" rel="noopener">空间复杂度</a>为 <code>O(logn)</code>，在最差的情况下，若每次只完成了一个元素，那么空间复杂度为 <code>O(n)</code>。所以我们一般认为快速排序的空间复杂度为 <code>O(logn)</code>。</p>
+<p>快速排序基本上被认为是相同数量级的所有排序算法中，<strong>平均性能最好</strong>的。</p>
+<p>参考链接：</p>
+<p><a href="http://data.biancheng.net/view/117.html" target="_blank" rel="noopener">http://data.biancheng.net/view/117.html</a></p>
+<p><a href="https://blog.csdn.net/MoreWindows/article/details/6684558" target="_blank" rel="noopener">https://blog.csdn.net/MoreWindows/article/details/6684558</a></p>
+<p><a href="https://www.runoob.com/w3cnote/quick-sort-2.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/quick-sort-2.html</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/64659156" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/64659156</a></p>
+<p><a href="http://data.biancheng.net/view/117.html" target="_blank" rel="noopener">http://data.biancheng.net/view/117.html</a></p>
+
       
 
       
@@ -673,11 +802,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">思考</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">思考</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
