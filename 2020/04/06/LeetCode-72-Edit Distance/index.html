@@ -6,23 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>LeetCode 01 Two Sum | zhyhy</title>
+  <title>LeetCode-72-Edit Distance | zhyhy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="LeetCode-01-Two Sum">
-<meta name="keywords" content="算法，哈希表，动态规划">
+  <meta name="description" content="LeetCode-72-Edit Distance">
+<meta name="keywords" content="动态规划，二维动态规划">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 01 Two Sum">
-<meta property="og:url" content="http://yoursite.com/2020/04/04/LeetCode-01-Two Sum/index.html">
+<meta property="og:title" content="LeetCode-72-Edit Distance">
+<meta property="og:url" content="http://yoursite.com/2020/04/06/LeetCode-72-Edit Distance/index.html">
 <meta property="og:site_name" content="zhyhy">
-<meta property="og:description" content="LeetCode-01-Two Sum">
+<meta property="og:description" content="LeetCode-72-Edit Distance">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405095045.png">
-<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405095558.png">
-<meta property="og:updated_time" content="2020-04-05T03:00:53.055Z">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406092050.png">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406093205.png">
+<meta property="og:updated_time" content="2020-04-06T01:33:41.924Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode 01 Two Sum">
-<meta name="twitter:description" content="LeetCode-01-Two Sum">
-<meta name="twitter:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405095045.png">
+<meta name="twitter:title" content="LeetCode-72-Edit Distance">
+<meta name="twitter:description" content="LeetCode-72-Edit Distance">
+<meta name="twitter:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406092050.png">
   
     <link rel="alternative" href="/atom.xml" title="zhyhy" type="application/atom+xml">
   
@@ -161,20 +161,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-LeetCode-01-Two Sum" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-LeetCode-72-Edit Distance" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      LeetCode 01 Two Sum
+      LeetCode-72-Edit Distance
     </h1>
   
 
         
-        <a href="/2020/04/04/LeetCode-01-Two Sum/" class="archive-article-date">
-  	<time datetime="2020-04-04T01:40:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-04</time>
+        <a href="/2020/04/06/LeetCode-72-Edit Distance/" class="archive-article-date">
+  	<time datetime="2020-04-06T01:20:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
 </a>
         
 
@@ -184,20 +184,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="LeetCode-01-Two-Sum"><a href="#LeetCode-01-Two-Sum" class="headerlink" title="LeetCode-01-Two Sum"></a>LeetCode-01-Two Sum</h3><a id="more"></a>
+        <h3 id="LeetCode-72-Edit-Distance"><a href="#LeetCode-72-Edit-Distance" class="headerlink" title="LeetCode-72-Edit Distance"></a>LeetCode-72-Edit Distance</h3><a id="more"></a>
 
 <p>题目描述：</p>
-<p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405095045.png" alt="image-20200405095044738"></p>
-<p>链接：<a href="https://leetcode-cn.com/problems/two-sum/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/two-sum/</a></p>
-<p><strong>思路分析：</strong></p>
-<p>刚开始想对数组先排序，然后使用双指针，当nums[l] + num[r] == target 的时候，返回 l 和 r，后来发现，放回的并不是最初数组的索引，思路pass！</p>
-<p><strong>正确思路：</strong></p>
-<p>使用HashMap，对数组进行遍历，如果map中存有target - nums[i]的话，就return, 否则将nums[i]及其对应的索引存入map中，有点<strong>DP、记忆化搜索</strong>的感觉。</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] numbers, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;Integer, Integer&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numbers.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(target - numbers[i])) &#123;</span><br><span class="line">                result[<span class="number">1</span>] = i;</span><br><span class="line">                result[<span class="number">0</span>] = map.get(target - numbers[i]);</span><br><span class="line">                <span class="keyword">return</span> result;</span><br><span class="line">            &#125;</span><br><span class="line">            map.put(numbers[i], i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406092050.png" alt="image-20200406092042276"></p>
+<p>链接：<a href="https://leetcode-cn.com/problems/edit-distance/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/edit-distance/</a></p>
+<h5 id="思路分析："><a href="#思路分析：" class="headerlink" title="思路分析："></a><strong>思路分析：</strong></h5><p>在最开始，想到了BFS，后来发现是一个计数的问题，然而，动态规划一般就是针对计数问题的，所以尝试用DP来解。</p>
+<p><strong>定义状态方程：</strong></p>
+<p>动态规划中最重要的就是状态方程，题目问的是：将word1转换成word2所用的最少次数，根据动态规划的原则：问什么，就将什么定义为状态方程，定义<code>dp[i][j]</code>为将<code>word1[0,i]</code>转换成<code>word2[0,j]</code>所需要的次数。</p>
+<p><strong>初始化</strong></p>
+<p>按照习惯，将<code>dp</code>多定义一个格子：<code>int[][] dp = new int[word1.length() + 1][word2.length() + 1]</code>,对于第一列和第一行，分别初始化为所在行以及所在列。 </p>
+<p><strong>状态转移方程</strong></p>
+<p>对于<code>dp[i][j]</code>，当<code>word1[i]==word2[j]</code>的时候，就很简单，<code>d[i][j]=dp[i-1][j-1]</code>，当不相等的时候，就对应三个操作：</p>
+<ul>
+<li>插入字符</li>
+<li>删除字符</li>
+<li>替换字符</li>
+</ul>
+<p>总的来说，就是<code>dp[i][j-1],dp[i-1][j],dp[i-1][j-1]</code>三者中最小的一个 ，然后加一。</p>
+<p>状态转移方程：<code>d[i][j]=min(dp[i][j-1],dp[i-1][j],dp[i-1][j-1])</code>[这是<code>word1[i]!=word2[j]</code>]的时候。</p>
+<p><strong>输出</strong></p>
+<p>输出就是二维搜索数组的最右下角<code>dp[word1.length()][word2.length()]</code></p>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a><strong>代码：</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(String word1, String word2)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[word1.length() + <span class="number">1</span>][word2.length() + <span class="number">1</span>];</span><br><span class="line">            <span class="comment">// 初始化，对于第一列和第一行，分别初始化为所在行以及所在列。 </span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= word1.length(); i++) &#123;</span><br><span class="line">                dp[i][<span class="number">0</span>] = i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= word2.length(); j++) &#123;</span><br><span class="line">                dp[<span class="number">0</span>][j] = j;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// dp</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= word1.length(); i++) &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= word2.length(); j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(word1.charAt(i-<span class="number">1</span>) == word2.charAt(j-<span class="number">1</span>)) &#123;</span><br><span class="line">                        dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> &#123;</span><br><span class="line">                        dp[i][j] = Math.min(dp[i-<span class="number">1</span>][j],Math.min(dp[i-<span class="number">1</span>][j-<span class="number">1</span>],dp[i][j-<span class="number">1</span>])) + <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> dp[word1.length()][word2.length()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>AC记录：</strong></p>
-<p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405095558.png" alt="image-20200405095557387"></p>
+<h5 id="AC记录："><a href="#AC记录：" class="headerlink" title="AC记录："></a><strong>AC记录：</strong></h5><p><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200406093205.png" alt="image-20200406093204578"></p>
+<p><strong>总结：</strong></p>
+<p>二维动态规划典型题，重点就是在状态方程如何定义以及状态转移方程，在写代码的时候，需要注意初始化，以及根据三种操作（插入，删除、替换）来推导状态转移方程。</p>
 
       
 
@@ -240,7 +252,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">算法，哈希表，动态规划</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">动态规划，二维动态规划</a>
         		</li>
       		
 		</ul>
@@ -316,7 +328,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/04/LeetCode-01-Two Sum/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/06/LeetCode-72-Edit Distance/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -330,18 +342,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/05/LeetCode-02-Add Two numbers/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          LeetCode 02 Add Two Number
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/04/LeetCode-05-Longest Palindromic Substring/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">LeetCod-5-Longest Palindromic Substring</div>
+    <a href="/2020/04/05/LeetCode-917-Reverse Only Letters/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode-917-Reverse Only Letters</div>
       <i class="icon-circle-right"></i>
     </a>
   
