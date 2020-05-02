@@ -6,20 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Keras中模型的保存于加载 | zhyhy</title>
+  <title>LeetCode-136-Single Number | zhyhy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在Keras中，经常需要多模型的结构和权重进行保存和加载,本文对Keras的模型的保存于加载进行了浅层次的学习。（checkpoint回调函数的话，是在训练过程中，不同epoch之间进行模型的return操作，本文讲的是讲训练过程中return的模型进行保存到本地的过程，本人理解…）">
-<meta name="keywords" content="Keras">
+  <meta name="description" content="LeetCode-136-Single Number">
+<meta name="keywords" content="热题100,哈希表，位运算">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Keras中模型的保存于加载">
-<meta property="og:url" content="http://yoursite.com/2019/09/05/Keras中模型的保存于加载/index.html">
+<meta property="og:title" content="LeetCode-136-Single Number">
+<meta property="og:url" content="http://yoursite.com/2020/04/04/LeetCode-136-Single Number/index.html">
 <meta property="og:site_name" content="zhyhy">
-<meta property="og:description" content="在Keras中，经常需要多模型的结构和权重进行保存和加载,本文对Keras的模型的保存于加载进行了浅层次的学习。（checkpoint回调函数的话，是在训练过程中，不同epoch之间进行模型的return操作，本文讲的是讲训练过程中return的模型进行保存到本地的过程，本人理解…）">
+<meta property="og:description" content="LeetCode-136-Single Number">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-04-04T03:18:38.804Z">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502095549.png">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502100410.png">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502100454.png">
+<meta property="og:updated_time" content="2020-05-02T02:05:31.476Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Keras中模型的保存于加载">
-<meta name="twitter:description" content="在Keras中，经常需要多模型的结构和权重进行保存和加载,本文对Keras的模型的保存于加载进行了浅层次的学习。（checkpoint回调函数的话，是在训练过程中，不同epoch之间进行模型的return操作，本文讲的是讲训练过程中return的模型进行保存到本地的过程，本人理解…）">
+<meta name="twitter:title" content="LeetCode-136-Single Number">
+<meta name="twitter:description" content="LeetCode-136-Single Number">
+<meta name="twitter:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502095549.png">
   
     <link rel="alternative" href="/atom.xml" title="zhyhy" type="application/atom+xml">
   
@@ -158,20 +162,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Keras中模型的保存于加载" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-LeetCode-136-Single Number" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Keras中模型的保存于加载
+      LeetCode-136-Single Number
     </h1>
   
 
         
-        <a href="/2019/09/05/Keras中模型的保存于加载/" class="archive-article-date">
-  	<time datetime="2019-09-05T14:11:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-05</time>
+        <a href="/2020/04/04/LeetCode-136-Single Number/" class="archive-article-date">
+  	<time datetime="2020-04-04T01:40:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-04</time>
 </a>
 
         
@@ -188,34 +192,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在Keras中，经常需要多模型的结构和权重进行保存和加载,本文对Keras的模型的保存于加载进行了浅层次的学习。（checkpoint回调函数的话，是在训练过程中，不同epoch之间进行模型的return操作，本文讲的是讲训练过程中return的模型进行保存到本地的过程，本人理解…）</p>
-<a id="more"></a>
-<h2 id="Keras中模型保存"><a href="#Keras中模型保存" class="headerlink" title="Keras中模型保存"></a>Keras中模型保存</h2><h3 id="model-save-filepath"><a href="#model-save-filepath" class="headerlink" title="model.save(filepath)"></a>model.save(filepath)</h3><ul>
-<li>模型结构  - &gt; 重构模型</li>
-<li>模型权重</li>
-<li>训练配置（损失函数，优化器等等）</li>
-<li>优化器状态 - &gt; 方便从上次训练中断的地方重新开始训练。<h3 id="keras-models-load-model-filepath"><a href="#keras-models-load-model-filepath" class="headerlink" title="keras.models.load_model(filepath)"></a>keras.models.load_model(filepath)</h3>重新实例化模型，如果文件中存储了训练设置的话，也会完成模型的编译。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> load_model</span><br><span class="line">model.save(<span class="string">'my_model.h5'</span>)</span><br><span class="line"><span class="keyword">del</span> model <span class="comment"># 删除模型</span></span><br><span class="line">model = load_model(<span class="string">'my_model.h5'</span>) <span class="comment"># 重新加载模型</span></span><br></pre></td></tr></table></figure>
+        <h3 id="LeetCode-136-Single-Number"><a href="#LeetCode-136-Single-Number" class="headerlink" title="LeetCode-136-Single Number"></a><a href="https://leetcode-cn.com/problems/single-number/" target="_blank" rel="noopener">LeetCode-136-Single Number</a></h3><a id="more"></a>
 
-</li>
-</ul>
-<h3 id="model-to-json-，model-to-yaml"><a href="#model-to-json-，model-to-yaml" class="headerlink" title="model.to_json()，model.to+yaml()"></a>model.to_json()，model.to+yaml()</h3><p>这两个函数可以模型序列化为json或yaml文件。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 存储为JSON</span></span><br><span class="line">json_string = model.to_json()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 存储为YAML</span></span><br><span class="line">yaml_string = model.to_yaml()</span><br></pre></td></tr></table></figure>
+<p>题目描述：</p>
+<img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502095549.png" alt="image-20200502095548716" style="zoom:80%;">
 
-<h3 id="model-from-json，model-from-yaml"><a href="#model-from-json，model-from-yaml" class="headerlink" title="model_from_json，model_from_yaml"></a>model_from_json，model_from_yaml</h3><p>从JSON文件或者YAML文件加载模型</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> model_from_json</span><br><span class="line">model = moel_from_json(json_string)</span><br><span class="line"></span><br><span class="line">model = model_from_yaml(yaml_string)</span><br></pre></td></tr></table></figure>
+<h5 id="思路分析："><a href="#思路分析：" class="headerlink" title="思路分析："></a><strong>思路分析：</strong></h5><p>第一次想到的就行哈希表，先写一个demo看看。</p>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a><strong>代码：</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 哈希表</span></span><br><span class="line">        HashMap&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            map.put(nums[i], map.getOrDefault(nums[i], <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(map.get(nums[i]) == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="model-save-weight"><a href="#model-save-weight" class="headerlink" title="model.save_weight()"></a>model.save_weight()</h3><p>该函数可以保存模型的权重。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.save_weight(<span class="string">'my_model_weight.h5'</span>)</span><br></pre></td></tr></table></figure>
+<p>##### </p>
+<p><strong>优化代码：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int singleNumber(int[] nums) &#123;</span><br><span class="line">        // 哈希表</span><br><span class="line">        HashMap&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();   </span><br><span class="line">        for(int n : nums) &#123;</span><br><span class="line">            map.put(n,map.getOrDefault(n,0) + 1);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        for(int n : nums) &#123;</span><br><span class="line">            if(map.get(n) == 1) &#123;</span><br><span class="line">                return n;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="model-load-weight"><a href="#model-load-weight" class="headerlink" title="model.load_weight()"></a>model.load_weight()</h3><p>该函数可以将初始化一个<strong>完全相同的模型</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.load_weight(<span class="string">'my_model_weight.h5'</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="正确思路："><a href="#正确思路：" class="headerlink" title="正确思路："></a><strong>正确思路：</strong></h5><p>使用哈希表做的话，明显是用了额外的空间，那么不使用额外空间，要怎么做呢？没错，就是位运算！！！diao</p>
+<img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502100410.png" alt="image-20200502100409552" style="zoom:80%;">
 
-<blockquote>
-<p>如果需要加载权重到不同的网络结构（有些层一样）中，例如fine-tune或者transfer-learing，可以通过层名字加载模型。下面例子，就通过层的名字加载了一个网络权重，新的模型中，第一次dense_1重新加载了，第二层名为new_dense，没有重新加载</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">假如原模型为：</span></span><br><span class="line"><span class="string">    model = Sequential()</span></span><br><span class="line"><span class="string">    model.add(Dense(2, input_dim=3, name="dense_1"))</span></span><br><span class="line"><span class="string">    model.add(Dense(3, name="dense_2"))</span></span><br><span class="line"><span class="string">    ...</span></span><br><span class="line"><span class="string">    model.save_weights(fname)</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="comment"># new model</span></span><br><span class="line">model = Sequential()</span><br><span class="line">model.add(Dense(<span class="number">2</span>, input_dim=<span class="number">3</span>, name=<span class="string">"dense_1"</span>))  <span class="comment"># will be loaded</span></span><br><span class="line">model.add(Dense(<span class="number">10</span>, name=<span class="string">"new_dense"</span>))  <span class="comment"># will not be loaded</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># load weights from first model; will only affect the first layer, dense_1.</span></span><br><span class="line">model.load_weights(fname, by_name=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a><strong>代码：</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i : nums) &#123;</span><br><span class="line">      a ^= i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://keras-cn.readthedocs.io/en/latest/for_beginners/FAQ/#save_model" target="_blank" rel="noopener">https://keras-cn.readthedocs.io/en/latest/for_beginners/FAQ/#save_model</a></p>
+<h5 id="AC记录："><a href="#AC记录：" class="headerlink" title="AC记录："></a><strong>AC记录：</strong></h5><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502100454.png" alt="image-20200502100453199" style="zoom:80%;">
+
+
+
 
       
 
@@ -258,7 +255,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Keras</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">热题100</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">哈希表，位运算</a>
         		</li>
       		
 		</ul>
@@ -279,7 +280,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/编程//" class="article-tag-list-link color3">编程</a>
+        			<a href="/categories/LeetCode//" class="article-tag-list-link color4">LeetCode</a>
         		</li>
       		
 		</ul>
@@ -334,7 +335,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/05/Keras中模型的保存于加载/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/04/LeetCode-136-Single Number/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -348,18 +349,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/05/杂七杂八/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/04/05/LeetCode-02-Add Two numbers/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          杂七杂八
+          LeetCode 02 Add Two Number
         
       </div>
     </a>
   
   
-    <a href="/2019/09/04/理解Keras中的Sequential-模型和model模型/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">理解Keras中的Sequential 模型和model模型</div>
+    <a href="/2020/04/04/LeetCode-05-Longest Palindromic Substring/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCod-5-Longest Palindromic Substring</div>
       <i class="icon-circle-right"></i>
     </a>
   
