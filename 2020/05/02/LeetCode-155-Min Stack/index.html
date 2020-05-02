@@ -6,23 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>理解二叉树的DFS和BFS | zhyhy</title>
+  <title>LeetCode-155-Min Stack | zhyhy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="二叉树遍历D：访问根结点，L：遍历根结点的左子树，R：遍历根结点的右子树。给定一个二叉树的前序遍历和中序遍历可以唯一确定一个二叉树。二叉树的深度优先遍历（DFS）非递归通常采用栈，广度优先遍历（BFS）的非递归通常采用队列。">
-<meta name="keywords" content="算法">
+  <meta name="description" content="LeetCode-155- Min Stack">
+<meta name="keywords" content="热题100">
 <meta property="og:type" content="article">
-<meta property="og:title" content="理解二叉树的DFS和BFS">
-<meta property="og:url" content="http://yoursite.com/2019/08/31/理解二叉树的DFS和BFS/index.html">
+<meta property="og:title" content="LeetCode-155-Min Stack">
+<meta property="og:url" content="http://yoursite.com/2020/05/02/LeetCode-155-Min Stack/index.html">
 <meta property="og:site_name" content="zhyhy">
-<meta property="og:description" content="二叉树遍历D：访问根结点，L：遍历根结点的左子树，R：遍历根结点的右子树。给定一个二叉树的前序遍历和中序遍历可以唯一确定一个二叉树。二叉树的深度优先遍历（DFS）非递归通常采用栈，广度优先遍历（BFS）的非递归通常采用队列。">
+<meta property="og:description" content="LeetCode-155- Min Stack">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/31/ed87d510-cbfc-11e9-b88a-a54b4ea9ea3f.png">
-<meta property="og:image" content="http://yoursite.com/images/2019/08/31/71927dd0-cbf6-11e9-b88a-a54b4ea9ea3f.png">
-<meta property="og:updated_time" content="2020-04-04T03:21:55.911Z">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502104336.png">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502104742.png">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502110353.png">
+<meta property="og:updated_time" content="2020-05-02T03:05:29.256Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="理解二叉树的DFS和BFS">
-<meta name="twitter:description" content="二叉树遍历D：访问根结点，L：遍历根结点的左子树，R：遍历根结点的右子树。给定一个二叉树的前序遍历和中序遍历可以唯一确定一个二叉树。二叉树的深度优先遍历（DFS）非递归通常采用栈，广度优先遍历（BFS）的非递归通常采用队列。">
-<meta name="twitter:image" content="http://yoursite.com/images/2019/08/31/ed87d510-cbfc-11e9-b88a-a54b4ea9ea3f.png">
+<meta name="twitter:title" content="LeetCode-155-Min Stack">
+<meta name="twitter:description" content="LeetCode-155- Min Stack">
+<meta name="twitter:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502104336.png">
   
     <link rel="alternative" href="/atom.xml" title="zhyhy" type="application/atom+xml">
   
@@ -161,20 +162,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-理解二叉树的DFS和BFS" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-LeetCode-155-Min Stack" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      理解二叉树的DFS和BFS
+      LeetCode-155-Min Stack
     </h1>
   
 
         
-        <a href="/2019/08/31/理解二叉树的DFS和BFS/" class="archive-article-date">
-  	<time datetime="2019-08-31T13:37:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-31</time>
+        <a href="/2020/05/02/LeetCode-155-Min Stack/" class="archive-article-date">
+  	<time datetime="2020-05-02T01:40:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
 </a>
 
         
@@ -191,18 +192,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p>D：访问根结点，L：遍历根结点的左子树，R：遍历根结点的右子树。<br>给定一个二叉树的前序遍历和中序遍历可以唯一确定一个二叉树。<br>二叉树的深度优先遍历（DFS）非递归通常采用栈，广度优先遍历（BFS）的非递归通常采用队列。</p>
-<a id="more"></a>
-<p>1）深度优先（递归和非递归实现）<br>①先序遍历：先访问根节点，然后访问左孩子和右孩子<br>②中序遍历：先访问左孩子，然后访问根节点，最后访问右孩子<br>③后序遍历：先访问左孩子，然后右孩子，然后访问根节点<br>2）广度优先遍历<br>按照说的深度，一层一层的访问树的节点</p>
-<h3 id="深度优先遍历二叉树"><a href="#深度优先遍历二叉树" class="headerlink" title="深度优先遍历二叉树"></a>深度优先遍历二叉树</h3><h4 id="递归实现"><a href="#递归实现" class="headerlink" title="递归实现"></a>递归实现</h4><p>1.中序遍历（LDR）的递归算法：<br>如果二叉树为空，算法结束，否则：<br>   中序遍历根节点的左子树；<br>   访问根节点；<br>   中序遍历根节点的右子树。<br>2.前序遍历（DLR）递归：<br>如果二叉树为空，算法结束，否则：<br>   访问根节点；<br>   前序遍历根节点的左子树；<br>   前序遍历根节点的右子树；<br>3.后序遍历（LRD）递归：<br>如果二叉树为空，算法结束，否则：<br>   后序遍历根节点的左子树；<br>   后序遍历根节点的右子树；<br>   访问根节点；</p>
-<h4 id="用栈实现"><a href="#用栈实现" class="headerlink" title="用栈实现"></a>用栈实现</h4><p>1.中序遍历<br>先将当前节点的所有左侧子节点压入栈，直到指针指向空；然后一个个弹出栈中的节点访问当前节点的右节点（对右节点也是每个子节点进行入栈）。<br>2.前序遍历<br>先将root节点push进去作为初始值，检查栈是否为空，如果不为空，则弹出最上面的元素，将其输出，如果该元素有左右两个节点，现将右节点入栈，然后再将左节点入栈。<br>3.先将当前节点的所有左侧子结点压入栈，现在要保证在访问当前节点的右子结点之后才能访问当前节点。所以每次从栈中拿出左侧节点时，都需要判断该节点的右子树是否存在或右子树是否被访问过，这里使用了一个preNode来记录刚被访问过的节点，这样就可以实现只有当前节点的右子结点访问完成，才能访问当前节点。<br>举例说明：<br><img src="/images/2019/08/31/ed87d510-cbfc-11e9-b88a-a54b4ea9ea3f.png" alt="image.png"><br>英文缩写为DFS即Depth First Search.其过程简要来说是对每一个可能的分支路径深入到不能再深入为止，而且每个节点只能访问一次。对于上面的例子来说深度优先遍历的结果就是：A,B,D,E,I,C,F,G,H.(假设先走子节点的的左侧)。<br>深度优先遍历各个节点，需要使用到堆（Stack）这种数据结构。stack的特点是是先进后出。整个遍历过程如下：<br>首先将A节点压入堆中，stack（A）;</p>
-<p>将A节点弹出，同时将A的子节点C，B压入堆中，此时B在堆的顶部，stack(B,C)；</p>
-<p>将B节点弹出，同时将B的子节点E，D压入堆中，此时D在堆的顶部，stack（D,E,C）；</p>
-<p>将D节点弹出，没有子节点压入,此时E在堆的顶部，stack（E，C）；</p>
-<p>将E节点弹出，同时将E的子节点I压入，stack（I,C）；</p>
-<p>…依次往下</p>
-<h3 id="广度优先遍历二叉树"><a href="#广度优先遍历二叉树" class="headerlink" title="广度优先遍历二叉树"></a>广度优先遍历二叉树</h3><p>一般是用队列实现。算法如下：<br>1.初始化队列，把根节点入队列；<br>2.如果队列非空，循环执行3-5，否则6<br>3.出队列，取得一个节点，访问该节点；<br>4.若该节点的左孩子为非空，则将该节点的左孩子入队列<br>5.若该节点的右孩子为非空，则将该节点的右孩子入队列<br>6.结束<br>举例说明：<br><img src="/images/2019/08/31/71927dd0-cbf6-11e9-b88a-a54b4ea9ea3f.png" alt="image.png"></p>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a href="https://www.cnblogs.com/way_testlife/archive/2010/10/07/1845264.html" target="_blank" rel="noopener">https://www.cnblogs.com/way_testlife/archive/2010/10/07/1845264.html</a><br><a href="https://xiaqiu2233.github.io" target="_blank" rel="noopener">https://xiaqiu2233.github.io</a><br><a href="https://blog.csdn.net/dyy_gusi/article/details/46414677" target="_blank" rel="noopener">https://blog.csdn.net/dyy_gusi/article/details/46414677</a></p>
+        <h3 id="LeetCode-155-Min-Stack"><a href="#LeetCode-155-Min-Stack" class="headerlink" title="LeetCode-155- Min Stack"></a><a href="https://leetcode-cn.com/problems/min-stack/" target="_blank" rel="noopener">LeetCode-155- Min Stack</a></h3><a id="more"></a>
+
+<p>题目描述：</p>
+<img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502104336.png" alt="image-20200502104335499" style="zoom:80%;">
+
+<h5 id="思路分析一（使用Java中的Stack）："><a href="#思路分析一（使用Java中的Stack）：" class="headerlink" title="思路分析一（使用Java中的Stack）："></a><strong>思路分析一（使用Java中的Stack）：</strong></h5><p>使用<code>Java</code>中的<code>Stack</code>。具体思想为：维护两个栈，一个存的是正常的<code>stack</code>，另外一个栈<code>minStack</code>存的是<code>stack</code>中的最小值。</p>
+<p>入栈 3<br>|   |    |   |<br>|   |    |   |<br>|<em>3</em>|    |<em>3</em>|<br>stack  minStack</p>
+<p>入栈 5 ， 5 大于 minStack 栈顶，不处理<br>|   |    |   |<br>| 5 |    |   |<br>|<em>3</em>|    |<em>3</em>|<br>stack  minStack</p>
+<p>入栈 2 ，此时右边的 minStack 栈顶就保存了当前最小值 2<br>| 2 |    |   |<br>| 5 |    | 2 |<br>|<em>3</em>|    |<em>3</em>|<br>stack  minStack</p>
+<p>出栈 2，此时右边的 minStack 栈顶就保存了当前最小值 3<br>|   |    |   |<br>| 5 |    |   |<br>|<em>3</em>|    |<em>3</em>|<br>stack  minStack</p>
+<p>出栈 5，右边 minStack 不处理<br>|   |    |   |<br>|   |    |   |<br>|<em>3</em>|    |<em>3</em>|<br>stack  minStack</p>
+<p>出栈 3<br>|   |    |   |<br>|   |    |   |<br>|_ <em>|    |</em> _|<br>stack  minStack</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MinStack</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; stack;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; minStack;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** initialize your data structure here. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MinStack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        stack = <span class="keyword">new</span> Stack();</span><br><span class="line">        minStack = <span class="keyword">new</span> Stack();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        stack.push(x);</span><br><span class="line">        <span class="keyword">if</span>(!minStack.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> minValue = minStack.peek();</span><br><span class="line">            <span class="keyword">if</span>(x &lt;= minValue)&#123;</span><br><span class="line">                minStack.push(x);</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            minStack.push(x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> popValue = stack.pop();</span><br><span class="line">        <span class="keyword">if</span>(minStack.peek() == popValue) &#123;</span><br><span class="line">            minStack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> stack.peek();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> minStack.peek();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your MinStack object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * MinStack obj = new MinStack();</span></span><br><span class="line"><span class="comment"> * obj.push(x);</span></span><br><span class="line"><span class="comment"> * obj.pop();</span></span><br><span class="line"><span class="comment"> * int param_3 = obj.top();</span></span><br><span class="line"><span class="comment"> * int param_4 = obj.getMin();</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="AC记录："><a href="#AC记录：" class="headerlink" title="AC记录："></a><strong>AC记录：</strong></h5><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502104742.png" alt="image-20200502104741415" style="zoom:80%;">
+
+<h5 id="思路分析二（不使用Java中的Stack"><a href="#思路分析二（不使用Java中的Stack" class="headerlink" title="思路分析二（不使用Java中的Stack)"></a><strong>思路分析二（不使用Java中的Stack)</strong></h5><p>具体地说，就是使用一个链表，链表中有一个最小值字段。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">class MinStack &#123;</span><br><span class="line"></span><br><span class="line">    class Node &#123;</span><br><span class="line">        int value;</span><br><span class="line">        int min;</span><br><span class="line">        Node next;</span><br><span class="line">        Node(int x, int min) &#123;</span><br><span class="line">            this.value = x;</span><br><span class="line">            this.min = min;</span><br><span class="line">            next = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    Node head;</span><br><span class="line">    public void push(int x) &#123;</span><br><span class="line">        if(head == null) &#123;</span><br><span class="line">            head = new Node(x,x);</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            Node n = new Node(x,Math.min(x,head.min));  // min是当前x和头节点的min的最小值</span><br><span class="line">            n.next = head;	// 将头结点往前移动</span><br><span class="line">            head = n;</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void pop() &#123;</span><br><span class="line">        if(head != null)&#123;</span><br><span class="line">            head =  head.next;</span><br><span class="line">        &#125;</span><br><span class="line">                </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int top() &#123;</span><br><span class="line">        if(head != null)&#123;</span><br><span class="line">            return head.value;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public int getMin() &#123;</span><br><span class="line">        if(head != null) &#123;</span><br><span class="line">            return head.min;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your MinStack object will be instantiated and called as such:</span><br><span class="line"> * MinStack obj = new MinStack();</span><br><span class="line"> * obj.push(x);</span><br><span class="line"> * obj.pop();</span><br><span class="line"> * int param_3 = obj.top();</span><br><span class="line"> * int param_4 = obj.getMin();</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
+<p><strong>AC记录：</strong></p>
+<img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502110353.png" alt="image-20200502110353124" style="zoom:80%;">
+
+
+
+<h5 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h5><p><a href="https://leetcode-cn.com/problems/min-stack/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-38/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/min-stack/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-38/</a></p>
 
       
 
@@ -245,7 +260,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">热题100</a>
         		</li>
       		
 		</ul>
@@ -266,7 +281,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/算法与数据结构//" class="article-tag-list-link color3">算法与数据结构</a>
+        			<a href="/categories/LeetCode//" class="article-tag-list-link color4">LeetCode</a>
         		</li>
       		
 		</ul>
@@ -321,7 +336,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/31/理解二叉树的DFS和BFS/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/02/LeetCode-155-Min Stack/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -335,18 +350,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/03/理解keras中的回调函数Callbacks/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/05/02/LeetCode-3- Longest Substring Without Repeating Characters/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          理解keras中的回调函数Callbacks
+          LeetCode-3-Longest Substring Without Repeating Characters
         
       </div>
     </a>
   
   
-    <a href="/2019/08/31/理解Python中的匿名函数与lambda表达式/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">理解Python中的匿名函数与lambda表达式</div>
+    <a href="/2020/05/02/LeetCode-136-Single Number/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode-136-Single Number</div>
       <i class="icon-circle-right"></i>
     </a>
   
