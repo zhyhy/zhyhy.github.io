@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 回文 | zhyhy</title>
+  <title>LeetCode-739-Daily Temperatures | zhyhy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zhyhy">
-<meta property="og:url" content="http://yoursite.com/tags/回文/index.html">
+  <meta name="description" content="LeetCode-739-Daily Temperatures">
+<meta name="keywords" content="热题100，单调栈">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode-739-Daily Temperatures">
+<meta property="og:url" content="http://yoursite.com/2020/05/02/LeetCode-739-Daily Temperatures/index.html">
 <meta property="og:site_name" content="zhyhy">
+<meta property="og:description" content="LeetCode-739-Daily Temperatures">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502224109.png">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502224421.png">
+<meta property="og:updated_time" content="2020-05-02T14:44:28.158Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zhyhy">
+<meta name="twitter:title" content="LeetCode-739-Daily Temperatures">
+<meta name="twitter:description" content="LeetCode-739-Daily Temperatures">
+<meta name="twitter:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502224109.png">
   
     <link rel="alternative" href="/atom.xml" title="zhyhy" type="application/atom+xml">
   
@@ -153,48 +161,107 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-LeetCode-739-Daily Temperatures" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/06/LeetCode-09-Palindrome Number/" class="archive-article-date">
-  	<time datetime="2020-04-06T03:40:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/06/LeetCode-09-Palindrome Number/">LeetCode-09-Palindrome Number</a>
+    <h1 class="article-title" itemprop="name">
+      LeetCode-739-Daily Temperatures
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/05/02/LeetCode-739-Daily Temperatures/" class="archive-article-date">
+  	<time datetime="2020-05-02T14:40:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
+</a>
+
+        
+        
+        
+        
+
+        
+
+        
+
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="LeetCode-739-Daily-Temperatures"><a href="#LeetCode-739-Daily-Temperatures" class="headerlink" title="LeetCode-739-Daily Temperatures"></a><a href="https://leetcode-cn.com/problems/daily-temperatures/" target="_blank" rel="noopener">LeetCode-739-Daily Temperatures</a></h3><a id="more"></a>
+
+<p>题目描述：</p>
+<img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502224109.png" alt="image-20200502224108186" style="zoom:80%;">
+
+<h5 id="思路分析："><a href="#思路分析：" class="headerlink" title="思路分析："></a><strong>思路分析：</strong></h5><p>单调栈来解决。维护一个单调栈（存的是索引），这个栈顶为最小值，如果要入栈的元素大于栈顶，就出栈，并且将出栈的<code>ans[stack.pop()] =stack.pop() - i</code>（这里写的有点不对，具体见代码部分）</p>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a><strong>代码：</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] dailyTemperatures(<span class="keyword">int</span>[] T) &#123;</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack();</span><br><span class="line">        <span class="keyword">int</span>[] ans = <span class="keyword">new</span> <span class="keyword">int</span>[T.length];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; T.length; ++i) &#123;</span><br><span class="line">            <span class="keyword">while</span>(!stack.isEmpty() &amp;&amp; T[stack.peek()] &lt; T[i]) &#123;</span><br><span class="line">                <span class="keyword">int</span> idx = stack.pop();</span><br><span class="line">                ans[idx] = i - idx;</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 因为初值就位零，索引无需进行下一步</span></span><br><span class="line">        <span class="comment">// while(!stack.isEmpty()) &#123;</span></span><br><span class="line">        <span class="comment">//    ans[stack.pop()] = 0;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="AC记录："><a href="#AC记录：" class="headerlink" title="AC记录："></a><strong>AC记录：</strong></h5><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502224421.png" alt="image-20200502224420478" style="zoom:80%;">
+
+
+
+<h5 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a><strong>参考链接</strong></h5><p><a href="https://leetcode-cn.com/problems/daily-temperatures/solution/leetcode-tu-jie-739mei-ri-wen-du-by-misterbooo/（视频）" target="_blank" rel="noopener">https://leetcode-cn.com/problems/daily-temperatures/solution/leetcode-tu-jie-739mei-ri-wen-du-by-misterbooo/（视频）</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    
+    <div style="text-align:center;color: #00BFFF;font-size:14px;">
+    -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+    </div>
+    
+
+
+
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">回文</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">热题100，单调栈</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      <!-- 开始添加阅读量-->
+      
+      <span id="busuanzi_container_page_pv">
+      |  阅读量<span id="busuanzi_value_page_pv"></span>次
+      </span>
+      
+      <!-- 添加完成 -->
+
+
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -207,17 +274,113 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/02/LeetCode-739-Daily Temperatures/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/05/03/LeetCode-23-Merge k Sorted Lists/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          LeetCode
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2020/05/02/LeetCode-221-Maximal Square/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode-221-Maximal Square</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -253,9 +416,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
