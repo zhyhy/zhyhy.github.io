@@ -6,23 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>LeetCode-62-Unique Paths | zhyhy</title>
+  <title>LeetCode-32-Longest Valid Parentheses | zhyhy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="LeetCode- 62-Unique Paths">
-<meta name="keywords" content="热题100，动态规划">
+  <meta name="description" content="LeetCode-32-Longest Valid Parentheses">
+<meta name="keywords" content="热题100，栈">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode-62-Unique Paths">
-<meta property="og:url" content="http://yoursite.com/2020/04/08/LeetCode-62-Unique Paths/index.html">
+<meta property="og:title" content="LeetCode-32-Longest Valid Parentheses">
+<meta property="og:url" content="http://yoursite.com/2020/05/03/LeetCode-32-Longest Valid Parentheses/index.html">
 <meta property="og:site_name" content="zhyhy">
-<meta property="og:description" content="LeetCode- 62-Unique Paths">
+<meta property="og:description" content="LeetCode-32-Longest Valid Parentheses">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200408143012.png">
-<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200408141924.png">
-<meta property="og:updated_time" content="2020-04-08T07:05:31.262Z">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200503100901.png">
+<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200503101021.png">
+<meta property="og:updated_time" content="2020-05-03T02:16:39.450Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode-62-Unique Paths">
-<meta name="twitter:description" content="LeetCode- 62-Unique Paths">
-<meta name="twitter:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200408143012.png">
+<meta name="twitter:title" content="LeetCode-32-Longest Valid Parentheses">
+<meta name="twitter:description" content="LeetCode-32-Longest Valid Parentheses">
+<meta name="twitter:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200503100901.png">
   
     <link rel="alternative" href="/atom.xml" title="zhyhy" type="application/atom+xml">
   
@@ -161,20 +161,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-LeetCode-62-Unique Paths" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-LeetCode-32-Longest Valid Parentheses" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      LeetCode-62-Unique Paths
+      LeetCode-32-Longest Valid Parentheses
     </h1>
   
 
         
-        <a href="/2020/04/08/LeetCode-62-Unique Paths/" class="archive-article-date">
-  	<time datetime="2020-04-08T06:14:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
+        <a href="/2020/05/03/LeetCode-32-Longest Valid Parentheses/" class="archive-article-date">
+  	<time datetime="2020-05-03T01:40:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-03</time>
 </a>
 
         
@@ -191,23 +191,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="LeetCode-62-Unique-Paths"><a href="#LeetCode-62-Unique-Paths" class="headerlink" title="LeetCode- 62-Unique Paths"></a><a href="https://leetcode-cn.com/problems/unique-paths/" target="_blank" rel="noopener">LeetCode- 62-Unique Paths</a></h3><a id="more"></a>
+        <h3 id="LeetCode-32-Longest-Valid-Parentheses"><a href="#LeetCode-32-Longest-Valid-Parentheses" class="headerlink" title="LeetCode-32-Longest Valid Parentheses"></a><a href="https://leetcode-cn.com/problems/longest-valid-parentheses/" target="_blank" rel="noopener">LeetCode-32-Longest Valid Parentheses</a></h3><a id="more"></a>
 
 <p>题目描述：</p>
-<img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200408143012.png" alt="image-20200408141502339" style="zoom:80%;">
+<img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200503100901.png" alt="image-20200503100859938" style="zoom:80%;">
 
-<p>链接：<a href="https://leetcode-cn.com/problems/unique-paths/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/unique-paths/</a></p>
-<h5 id="思路分析："><a href="#思路分析：" class="headerlink" title="思路分析："></a><strong>思路分析：</strong></h5><p>计数问题，当然用DP呀！！！</p>
-<h5 id="状态方程："><a href="#状态方程：" class="headerlink" title="状态方程："></a><strong>状态方程：</strong></h5><p>问什么，就定义什么。问题是一共有多少路径，则<code>dp[i][j]</code>表示到<code>i,j</code>的所有路径。</p>
-<p><strong>初始化：</strong></p>
-<p>题目说了，从<code>0,0</code>开始，只能<strong>往上和往下</strong>走，所有，第一行和第一列全为1。</p>
-<p><strong>状态转移方程：</strong></p>
-<p>对于不在第一行和第一列的位置，只能由上和左面两个方向来，则<code>dp[i][j] = dp[i-1][j] + dp[i][j-1]</code></p>
-<p><strong>返回值：</strong></p>
-<p>最右下角。</p>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a><strong>代码：</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(m == <span class="number">0</span> || n == <span class="number">0</span>)    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// DP</span></span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[m][n];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span>[] d : dp) &#123;</span><br><span class="line">            Arrays.fill(d,<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">                dp[i][j] = dp[i-<span class="number">1</span>][j] + dp[i][j-<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">return</span> dp[m-<span class="number">1</span>][n-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="思路分析："><a href="#思路分析：" class="headerlink" title="思路分析："></a><strong>思路分析：</strong></h5><p>看到有效括号，第一反应就是想到栈。</p>
+<p>看到有效长度，就应该想到存的是下标。</p>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a><strong>代码：</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">longestValidParentheses</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack();</span><br><span class="line">        <span class="comment">// Stack&lt;Character&gt; stack2 = new Stack();</span></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        stack.push(-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) == <span class="string">'('</span>) &#123;</span><br><span class="line">                stack.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">                <span class="keyword">if</span>(stack.isEmpty()) &#123;</span><br><span class="line">                    stack.push(i);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                   <span class="comment">// System.out.println( i + " " + stack.peek());</span></span><br><span class="line"></span><br><span class="line">                    ans = Math.max(ans,i - stack.peek());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// System.out.println(i + " " + ans);</span></span><br><span class="line">        &#125;       </span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h5 id="AC记录："><a href="#AC记录：" class="headerlink" title="AC记录："></a><strong>AC记录：</strong></h5><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200408141924.png" alt="image-20200408141923970" style="zoom:80%;">
+<h5 id="AC记录："><a href="#AC记录：" class="headerlink" title="AC记录："></a><strong>AC记录：</strong></h5><img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200503101021.png" alt="image-20200503101020937" style="zoom:80%;">
 
 
 
@@ -253,7 +246,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">热题100，动态规划</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">热题100，栈</a>
         		</li>
       		
 		</ul>
@@ -329,7 +322,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/08/LeetCode-62-Unique Paths/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/03/LeetCode-32-Longest Valid Parentheses/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -343,18 +336,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/08/LeetCode-139-Word Break/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          LeetCode-139-Word Break
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/08/LeetCode-33-Search in Rotated Sorted Array/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">LeetCode-33-Search in Rotated Sorted Array</div>
+    <a href="/2020/05/03/LeetCode-23-Merge k Sorted Lists/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode</div>
       <i class="icon-circle-right"></i>
     </a>
   
