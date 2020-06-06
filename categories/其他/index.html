@@ -6,21 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Java刷题的一些技巧 | zhyhy</title>
+  <title>Category: 其他 | zhyhy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java刷题的一些技巧">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java刷题的一些技巧">
-<meta property="og:url" content="http://yoursite.com/2020/04/08/Java刷题技巧/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="zhyhy">
+<meta property="og:url" content="http://yoursite.com/categories/其他/index.html">
 <meta property="og:site_name" content="zhyhy">
-<meta property="og:description" content="Java刷题的一些技巧">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502100547.png">
-<meta property="og:updated_time" content="2020-05-22T15:35:25.732Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java刷题的一些技巧">
-<meta name="twitter:description" content="Java刷题的一些技巧">
-<meta name="twitter:image" content="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502100547.png">
+<meta name="twitter:title" content="zhyhy">
   
     <link rel="alternative" href="/atom.xml" title="zhyhy" type="application/atom+xml">
   
@@ -159,247 +153,73 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java刷题技巧" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Java刷题的一些技巧
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/06/06/2020华为软件精英挑战赛总结/" class="archive-article-date">
+  	<time datetime="2020-06-06T01:40:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-06</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/06/06/2020华为软件精英挑战赛总结/">2020华为软件精英挑战赛总结</a>
     </h1>
   
 
-        
-        <a href="/2020/04/08/Java刷题技巧/" class="archive-article-date">
-  	<time datetime="2020-04-08T01:40:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
-</a>
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">比赛</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-        
-        
-        
-        
-
-        
-
-        
-
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Java刷题的一些技巧"><a href="#Java刷题的一些技巧" class="headerlink" title="Java刷题的一些技巧"></a>Java刷题的一些技巧</h3><a id="more"></a>
-
-<p><strong>输出高纬数组</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Arrays.deepToString(arr));</span><br></pre></td></tr></table></figure>
-
-<p><strong>对哈希表put时的技巧</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map.put(n,map.getOrDefault(n,0) + 1);</span><br><span class="line">// 因为map.getOrDefault(n,0) -&gt; 如果n在map中，则获得n的value值，如果没有，就获得0，可以少些一些if</span><br></pre></td></tr></table></figure>
-
-<p><strong>数组去重</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法1</span></span><br><span class="line"><span class="keyword">if</span>(i&gt;<span class="number">0</span> &amp;&amp; nums[i]==nums[i-<span class="number">1</span>]) <span class="keyword">continue</span>; <span class="comment">// 去重</span></span><br><span class="line"><span class="comment">// 方法2</span></span><br><span class="line"><span class="keyword">while</span>(l &lt; r &amp;&amp; nums[l] == nums[l+<span class="number">1</span>]) l++;</span><br><span class="line"><span class="keyword">while</span>(l &lt; r &amp;&amp; nums[r] == nums[r-<span class="number">1</span>]) r--;</span><br></pre></td></tr></table></figure>
-
-<p><strong>二分法：</strong></p>
-<p>关于二分查找，有一个很好的<a href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/solution/er-fen-cha-zhao-suan-fa-xi-jie-xiang-jie-by-labula/" target="_blank" rel="noopener">题解</a>，总的来说，其实就是各个区间取不取等号，我一般习惯<code>while(l &lt; = r)</code>，同时<code>r = mid -1</code>，<code>l = mid + 1</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 二分法查找的debug技巧，可以看指针的变化来看搜索的过程。</span><br><span class="line">System.out.println(l + &quot; &quot; + mid + &quot; &quot; + r);</span><br></pre></td></tr></table></figure>
-
-<p><strong>多维数组初始化：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span>[] d : dp) &#123;</span><br><span class="line">    Arrays.fill(d,<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>理解DFS：</strong></p>
-<p><a href="https://www.bilibili.com/video/BV19J411J7AZ?p=2" target="_blank" rel="noopener">https://www.bilibili.com/video/BV19J411J7AZ?p=2</a></p>
-<p><strong>分割字符：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String reverseWords(String s) &#123;</span><br><span class="line">        // 除去开头和末尾的空白字符</span><br><span class="line">        s = s.trim();</span><br><span class="line">        // 正则匹配连续的空白字符作为分隔符分割</span><br><span class="line">        List&lt;String&gt; wordList = Arrays.asList(s.split(&quot;\\s+&quot;));</span><br><span class="line">        Collections.reverse(wordList);</span><br><span class="line">        return String.join(&quot; &quot;, wordList);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>一些ACM需要知道的</strong></p>
-<p><a href="http://tech.gladuo.com/archives/knowledge-and-poj-subject-acm-players-should-master-recommended.html" target="_blank" rel="noopener">http://tech.gladuo.com/archives/knowledge-and-poj-subject-acm-players-should-master-recommended.html</a></p>
-<p><strong>DP</strong></p>
-<p><a href="https://www.cnblogs.com/Loi-Brilliant/p/8982639.html" target="_blank" rel="noopener">https://www.cnblogs.com/Loi-Brilliant/p/8982639.html</a></p>
-<p><strong><a href="https://leetcode-cn.com/problems/single-number/" target="_blank" rel="noopener">位运算获得一组数组只出现一次的数</a></strong></p>
-<img src="https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200502100547.png" alt="image-20200502100545977" style="zoom:80%;">
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">  public int singleNumber(int[] nums) &#123;</span><br><span class="line">    int a = 0;</span><br><span class="line">    for (int i : nums) &#123;</span><br><span class="line">      a ^= i;</span><br><span class="line">    &#125;</span><br><span class="line">    return a;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>Java栈中存数组</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;<span class="keyword">int</span>[]&gt; q = <span class="keyword">new</span> LinkedList();</span><br><span class="line">q.offer(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>,<span class="number">0</span>&#125;)); <span class="comment">// 将数组[0,0]入栈</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>进制转换</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">25</span>;</span><br><span class="line">System.out.print(Integer.toBinaryString(a));    <span class="comment">//二进制</span></span><br><span class="line">System.out.print(Integer.toHexString(a));       <span class="comment">//十六进制</span></span><br><span class="line">System.out.print(Long.toBinaryString(a));       <span class="comment">//二进制</span></span><br><span class="line">System.out.print(Long.toHexString(a));          <span class="comment">//十六进制</span></span><br><span class="line">Integer.bitcount(a);							<span class="comment">//求有几个1</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>ArrayList和int[]的相互转换</strong></p>
-<p><a href="https://blog.csdn.net/weixin_41615787/article/details/85115620" target="_blank" rel="noopener">https://blog.csdn.net/weixin_41615787/article/details/85115620</a></p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    
-    <div style="text-align:center;color: #00BFFF;font-size:14px;">
-    -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
-    </div>
-    
-
-
-
-    <div class="article-info article-info-index">
-      
-        <div class="article-pop-out tagcloud">
-          <i class="icon-tuding"></i>
-          <a class="article-tag-list-link color3">置顶</a>
-        </div>
-      
-      
-      <!-- 开始添加阅读量-->
-      
-      <span id="busuanzi_container_page_pv">
-      |  阅读量<span id="busuanzi_value_page_pv"></span>次
-      </span>
-      
-      <!-- 添加完成 -->
-
-
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/LeetCode//" class="article-tag-list-link color4">LeetCode</a>
+        			<a href="/categories/其他//" class="article-tag-list-link color3">其他</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/08/Java刷题技巧/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/04/08/LeetCode-22-Generate Parentheses/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          LeetCode-22-Generate Parentheses
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/04/08/剑指offer-机器人的运动范围/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">剑指offer-机器人的运动范围</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
+    
 
-  
 
-  
 
 
           </div>
@@ -435,10 +255,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
